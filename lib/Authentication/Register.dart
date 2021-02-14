@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lefty/Authentication/Authentication_Services.dart';
+import 'package:lefty/main.dart';
 import 'package:lefty/static/Loading.dart';
 import 'package:provider/provider.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -152,6 +153,7 @@ class _RegisterState extends State<Register> {
                                         .signUp(
                                             email: email, password: password);
                                     if (isSuccess.toString() == "Signed up") {
+                                      isVerified = true;
                                       Navigator.pushReplacementNamed(
                                           context, '/Home');
                                       BotToast.showSimpleNotification(

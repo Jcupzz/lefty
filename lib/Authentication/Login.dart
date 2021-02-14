@@ -2,6 +2,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lefty/Authentication/Authentication_Services.dart';
+import 'package:lefty/main.dart';
 import 'package:lefty/static/Loading.dart';
 import 'package:provider/provider.dart';
 
@@ -157,6 +158,7 @@ class _LoginState extends State<Login> {
                                             email: email, password: password);
                                     print(isSuccess);
                                     if (isSuccess.toString() == "Signed in") {
+                                      isVerified = true;
                                       Navigator.pushReplacementNamed(
                                           context, '/Home');
                                       BotToast.showSimpleNotification(

@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lefty/Database_Services/Database_Services.dart';
+import 'package:lefty/main.dart';
+import 'package:lefty/static/Loading.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 class Create extends StatefulWidget {
@@ -12,6 +15,7 @@ class Create extends StatefulWidget {
 
 class _CreateState extends State<Create> {
   final _formKey = GlobalKey<FormState>();
+  String iName,iPhone1,iPhone2,iAddress,iType;
   final iNameController = TextEditingController();
   final iPhone1Controller = TextEditingController();
   final iPhone2Controller = TextEditingController();
@@ -20,7 +24,7 @@ class _CreateState extends State<Create> {
   int iHour = 1;
   File iPhoto;
   final picker = ImagePicker();
-
+  Database_Services database_services = new Database_Services();
   Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     setState(() {
@@ -34,7 +38,7 @@ class _CreateState extends State<Create> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return !(isVerified)? Loading(): Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -70,6 +74,9 @@ class _CreateState extends State<Create> {
                     ),
                   ),
                   TextFormField(
+                    onChanged: (value){
+                      iName = value;
+                    },
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please enter some text';
@@ -103,6 +110,9 @@ class _CreateState extends State<Create> {
                     ),
                   ),
                   TextFormField(
+                    onChanged: (value){
+                      iAddress = value;
+                    },
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please enter some text';
@@ -266,6 +276,9 @@ class _CreateState extends State<Create> {
                     ),
                   ),
                   TextFormField(
+                    onChanged: (value){
+                      iPhone1 = value;
+                    },
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please enter some text';
@@ -300,6 +313,9 @@ class _CreateState extends State<Create> {
                     ),
                   ),
                   TextFormField(
+                    onChanged: (value){
+                      iPhone2 = value;
+                    },
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please enter some text';
@@ -335,7 +351,29 @@ class _CreateState extends State<Create> {
                         onPressed: () {
 
                           if (_formKey.currentState.validate()) {
+
+                            switch(selectedValue)
+                            {
+                              case 1:
+                                iType = "Orphanage";
+                                break;
+
+                              case 2:
+                                iType = "Old Age Home";
+                                break;
+
+                              case 3:
+                                iType = "Mental Institution";
+                                break;
+
+                              case 4:
+                                iType = "Others";
+                                break;
+                            }
+
+
                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Processing Data')));
+                           database_services.addCreateToFb(iName, iAddress, iType, iHour, iPhoto, iPhone1, iPhone2);
                           }
 
                         },

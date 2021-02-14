@@ -10,6 +10,7 @@ import 'package:lefty/MyBottomNavigationBar.dart';
 import 'package:lefty/SplashScreen.dart';
 import 'package:provider/provider.dart';
 
+bool isVerified = false;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -26,12 +27,12 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
             builder: BotToastInit(),
             navigatorObservers: [BotToastNavigatorObserver()],
-            home: MyBottomNavigationBar(),
+            home: AuthenticationWrapper(),
             routes: {
               '/SplashScreen': (context) => SplashScreen(),
               '/Login': (context) => Login(),
               '/Register': (context) => Register(),
-              '/Home': (context) => Home(),
+              '/Home': (context) => MyBottomNavigationBar(),
             }));
   }
 }
@@ -43,11 +44,13 @@ class AuthenticationWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User>();
     print(firebaseUser);
     if (firebaseUser == null) {
-      return Register();
+      isVerified = false;
+      return MyBottomNavigationBar();
 
     }
     else{
-      return Home();
+      isVerified = true;
+      return MyBottomNavigationBar();
     }
 
 

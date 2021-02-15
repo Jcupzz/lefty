@@ -90,6 +90,10 @@ class _HomeState extends State<Home> {
                                                 document.data()['iAddress'],
                                                 style: TextStyle(color: Colors.black),
                                               ),
+                                              Text(
+                                                document.data()['iHour'].toString(),
+                                                style: TextStyle(color: Colors.black),
+                                              ),
                                             ],
                                           ),
                                         ),

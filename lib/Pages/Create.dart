@@ -41,10 +41,7 @@ class _CreateState extends State<Create> {
                   children: [
                     Text(
                       "Create",
-                      style: TextStyle(
-                          fontSize: 50,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 50, color: Colors.black, fontWeight: FontWeight.bold),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
@@ -57,15 +54,11 @@ class _CreateState extends State<Create> {
                         height: 50,
                         child: ElevatedButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => Register_Institute()));
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => Register_Institute()));
                             },
                             style: ElevatedButton.styleFrom(
                               elevation: 20,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                               primary: Colors.black,
                             ),
                             // style: ButtonStyle(
@@ -80,96 +73,61 @@ class _CreateState extends State<Create> {
                       ),
                     ),
                     StreamBuilder<QuerySnapshot>(
-                        stream: firestore
-                            .collection("iDetails")
-                            .doc("data")
-                            .collection(firebaseUser.uid)
-                            .snapshots(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<QuerySnapshot> snapshot) {
+                        stream: firestore.collection("iDetails").doc("data").collection(firebaseUser.uid).snapshots(),
+                        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                           if (!snapshot.hasData) {
                             return Loading();
                           } else {
                             return Expanded(
                               child: ListView(
                                 shrinkWrap: true,
-                                children: snapshot.data.docs
-                                    .map((DocumentSnapshot document) {
+                                children: snapshot.data.docs.map((DocumentSnapshot document) {
                                   return Card(
                                       color: Colors.white,
                                       elevation: 20,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(14.0)),
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
                                       child: ListTile(
                                         onTap: () {},
                                         onLongPress: () {
                                           //showDeleteDialog(document);
                                         },
                                         title: Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              0, 5, 5, 5),
+                                          padding: const EdgeInsets.fromLTRB(0, 5, 5, 5),
                                           child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 document.data()['iName'],
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                    letterSpacing: 1),
+                                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, letterSpacing: 1),
                                               ),
                                               Padding(
-                                                padding:
-                                                    const EdgeInsets.fromLTRB(
-                                                        0, 10, 0, 0),
+                                                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                                                 child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
                                                     Flexible(
                                                       flex: 1,
                                                       child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        mainAxisSize: MainAxisSize.max,
                                                         children: [
                                                           Text(
-                                                            document.data()[
-                                                                'iDesc'],
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black),
+                                                            document.data()['iDesc'],
+                                                            style: TextStyle(color: Colors.black),
                                                           ),
                                                           Text(
-                                                            document.data()[
-                                                                'iAddress'],
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black),
+                                                            document.data()['iAddress'],
+                                                            style: TextStyle(color: Colors.black),
                                                           ),
                                                           Text(
-                                                            document.data()[
-                                                                'iPhone1'],
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black),
+                                                            document.data()['iPhone1'],
+                                                            style: TextStyle(color: Colors.black),
                                                           ),
                                                           Text(
-                                                            document.data()[
-                                                                'iPhone2'],
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black),
+                                                            document.data()['iPhone2'],
+                                                            style: TextStyle(color: Colors.black),
                                                           ),
                                                         ],
                                                       ),
@@ -177,34 +135,19 @@ class _CreateState extends State<Create> {
                                                     Flexible(
                                                       flex: 1,
                                                       child: CachedNetworkImage(
-                                                        imageUrl: document
-                                                            .data()['iPhoto'],
-                                                        imageBuilder: (context,
-                                                                imageProvider) =>
-                                                            Container(
+                                                        imageUrl: document.data()['iPhoto'],
+                                                        imageBuilder: (context, imageProvider) => Container(
                                                           width: 180.0,
                                                           height: 120.0,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            shape: BoxShape
-                                                                .rectangle,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        20),
-                                                            image: DecorationImage(
-                                                                image:
-                                                                    imageProvider,
-                                                                fit: BoxFit
-                                                                    .cover),
+                                                          decoration: BoxDecoration(
+                                                            shape: BoxShape.rectangle,
+                                                            borderRadius: BorderRadius.circular(20),
+                                                            image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
                                                           ),
                                                         ),
-                                                        placeholder:
-                                                            ((context, s) =>
-                                                                Center(
-                                                                  child:
-                                                                      CircularProgressIndicator(),
-                                                                )),
+                                                        placeholder: ((context, s) => Center(
+                                                              child: CircularProgressIndicator(),
+                                                            )),
                                                         fit: BoxFit.cover,
                                                       ),
                                                     ),
@@ -212,32 +155,22 @@ class _CreateState extends State<Create> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding:
-                                                    const EdgeInsets.fromLTRB(
-                                                        0, 20, 0, 0),
+                                                padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                                                 child: Container(
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
+                                                  width: MediaQuery.of(context).size.width,
                                                   child: ElevatedButton(
                                                     onPressed: () {
-                                                      showRequestDialog(
-                                                          document);
+                                                      showRequestDialog(document, firebaseUser);
                                                     },
                                                     child: Text(
                                                       "Create Request",
-                                                      style: TextStyle(
-                                                          color: Colors.white),
+                                                      style: TextStyle(color: Colors.white),
                                                     ),
-                                                    style: ElevatedButton
-                                                        .styleFrom(
+                                                    style: ElevatedButton.styleFrom(
                                                       primary: Colors.black,
                                                       elevation: 10,
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20),
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius.circular(20),
                                                       ),
                                                     ),
                                                   ),
@@ -259,52 +192,62 @@ class _CreateState extends State<Create> {
           );
   }
 
-  void showRequestDialog(DocumentSnapshot document) {
+  void showRequestDialog(DocumentSnapshot document, User firebaseUser) {
     showDialog(
         context: context,
         builder: (_) => new AlertDialog(
-          title: new Text("Choose Hours"),
-          actions: <Widget>[
-          Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        new NumberPicker.horizontal(
-                            listViewHeight: 60,
-                            step: 1,
-                            initialValue: iHour,
-                            minValue: 1,
-                            maxValue: 48,
-                            onChanged: (value) {
-                              setState(() {
-                                iHour = value;
-                                print(iHour);
-                              });
-                            }),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: ElevatedButton(
-                            onPressed: () {
-                            },
-                            child: Text(
-                              "Done",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.black,
-                              elevation: 10,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
+              title: new Text("Choose Hours"),
+              actions: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: new NumberPicker.horizontal(
+                          listViewHeight: 60,
+                          step: 1,
+                          selectedTextStyle: TextStyle(color: Colors.blue),
+                          initialValue: iHour,
+                          minValue: 1,
+                          maxValue: 48,
+                          onChanged: (value) {
+                            setState(() {
+                              iHour = value;
+                              print(iHour);
+                            });
+                          }),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          firestore
+                              .collection("iDetails")
+                              .doc("data")
+                              .collection(firebaseUser.uid)
+                              .doc(document.id)
+                              .update({'iHour': iHour});
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          "Done",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.black,
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-
-                      ],
+                      ),
                     ),
-          ],
-        ));
+                  ],
+                ),
+              ],
+            ));
     // showDialog<int>(
     //     useSafeArea: true,
     //     barrierColor: Colors.white,

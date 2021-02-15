@@ -13,26 +13,26 @@ class Database_Services {
   //     firebase_storage.FirebaseStorage.instance;
 
   Future<void> addCreateToFb(
-      String iName,
-      String iAddress,
-      String iType,
-      int iHour,
-      File iPhoto,
-      String iPhone1,
-      String iPhone2,
-      String iDesc) async {
+      String iName, String iAddress, String iType, File iPhoto, String iPhone1, String iPhone2, String iDesc) async {
+
+
+    String downloadURL;
+    int iHour = 0;
     final User firebaseUser = _auth.currentUser;
-    CollectionReference collectionReference1 = FirebaseFirestore.instance
-        .collection("iDetails")
-        .doc("data")
-        .collection(firebaseUser.uid);
-    CollectionReference collectionReference2 =
-        FirebaseFirestore.instance.collection("iPublic");
+    if (iPhoto == null) {
+      downloadURL =
+          "https://firebasestorage.googleapis.com/v0/b/lefty-3ea7c.appspot.com/o/iPhoto%2Fdownload%20(1).jfif?alt=media&token=814aba01-5df8-4f95-b395-cbf595d266d4";
+    } else {
+      downloadURL = await uploadFile(iPhoto.path);
+    }
+
+    CollectionReference collectionReference1 =
+        FirebaseFirestore.instance.collection("iDetails").doc("data").collection(firebaseUser.uid);
+    CollectionReference collectionReference2 = FirebaseFirestore.instance.collection("iPublic");
     // firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
     //     .ref()
     //     .child("iPhoto");
 
-    String downloadURL = await uploadFile(iPhoto.path);
     if (!(downloadURL == 'Error')) {
       collectionReference1.add({
         'iName': iName,

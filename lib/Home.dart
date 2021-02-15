@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:lefty/main.dart';
 import 'package:lefty/static/Loading.dart';
 import 'package:provider/provider.dart';
 import 'package:lefty/Authentication/Authentication_Services.dart';
@@ -37,7 +36,7 @@ class _HomeState extends State<Home> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: StreamBuilder<QuerySnapshot>(
-            stream: firestore.collection("iDetails").orderBy('time',descending: true).snapshots(),
+            stream: firestore.collection("iPublic").snapshots(),
             builder: (BuildContext context,
                 AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) {
@@ -69,7 +68,7 @@ class _HomeState extends State<Home> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(document.data()['iName'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,letterSpacing: 1),),
+                                  Text(document['iName'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,letterSpacing: 1),),
                                   Padding(
                                     padding: const EdgeInsets.fromLTRB(0,10,0,0),
                                     child: Row(

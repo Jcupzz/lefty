@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: StreamBuilder<QuerySnapshot>(
-            stream: firestore.collection("iPublic").snapshots(),
+            stream: firestore.collection("iDetails").snapshots(),
             builder: (BuildContext context,
                 AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) {
@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(document['iName'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,letterSpacing: 1),),
+                                  Text(document.data()['iName'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,letterSpacing: 1),),
                                   Padding(
                                     padding: const EdgeInsets.fromLTRB(0,10,0,0),
                                     child: Row(

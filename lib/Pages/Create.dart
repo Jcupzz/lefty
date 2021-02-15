@@ -27,6 +27,7 @@ class _CreateState extends State<Create> {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
+    String fUserUid = firebaseUser.uid;
     return !(isVerified)
         ? Loading()
         : Scaffold(
@@ -73,7 +74,7 @@ class _CreateState extends State<Create> {
                       ),
                     ),
                     StreamBuilder<QuerySnapshot>(
-                        stream: firestore.collection("iDetails").doc("data").collection(firebaseUser.uid).snapshots(),
+                        stream: firestore.collection("iDetails").where('uid',isEqualTo: fUserUid).snapshots(),
                         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                           if (!snapshot.hasData) {
                             return Loading();
@@ -225,8 +226,6 @@ class _CreateState extends State<Create> {
                         onPressed: () {
                           firestore
                               .collection("iDetails")
-                              .doc("data")
-                              .collection(firebaseUser.uid)
                               .doc(document.id)
                               .update({'iHour': iHour});
                           Navigator.pop(context);

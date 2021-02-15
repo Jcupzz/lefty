@@ -27,8 +27,8 @@ class Database_Services {
     }
 
     CollectionReference collectionReference1 =
-        FirebaseFirestore.instance.collection("iDetails").doc("data").collection(firebaseUser.uid);
-    CollectionReference collectionReference2 = FirebaseFirestore.instance.collection("iPublic");
+        FirebaseFirestore.instance.collection("iDetails");
+    //CollectionReference collectionReference2 = FirebaseFirestore.instance.collection("iPublic");
     // firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
     //     .ref()
     //     .child("iPhoto");
@@ -51,22 +51,6 @@ class Database_Services {
         return 'Error';
       });
 
-      collectionReference2.add({
-        'iName': iName,
-        'iAddress': iAddress,
-        'iType': iType,
-        'iHour': iHour,
-        'iPhoto': downloadURL,
-        'iPhone1': iPhone1,
-        'iPhone2': iPhone2,
-        'iDesc': iDesc,
-        'time': DateTime.now(),
-        'uid': firebaseUser.uid,
-      }).then((value) {
-        return 'Done';
-      }).catchError((onError) {
-        return 'Error';
-      });
     }
   }
 

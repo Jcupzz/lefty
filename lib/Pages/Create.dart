@@ -15,11 +15,12 @@ class Create extends StatefulWidget {
 
 class _CreateState extends State<Create> {
   final _formKey = GlobalKey<FormState>();
-  String iName,iPhone1,iPhone2,iAddress,iType;
+  String iName,iPhone1,iPhone2,iAddress,iType,iDesc;
   final iNameController = TextEditingController();
   final iPhone1Controller = TextEditingController();
   final iPhone2Controller = TextEditingController();
   final iAddressController = TextEditingController();
+  final iDescController = TextEditingController();
   int selectedValue;
   int iHour = 1;
   File iPhoto;
@@ -245,6 +246,47 @@ class _CreateState extends State<Create> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                     child: Text(
+                      "Enter Description",
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  TextFormField(
+                    onChanged: (value){
+                      iDesc = value;
+                    },
+
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      return null;
+                    },
+                    minLines: 5,
+                    maxLines: 5,
+                    controller: iDescController,
+                    decoration: InputDecoration(
+                      alignLabelWithHint: true,
+                      hintText: "Description",
+                      fillColor: Colors.white,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide:
+                        BorderSide(width: 1, color: Colors.blueGrey[900]),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide:
+                        BorderSide(width: 1, color: Colors.blueGrey[900]),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                    child: Text(
                       "Select image of the institute (optional)",
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
@@ -373,7 +415,7 @@ class _CreateState extends State<Create> {
 
 
                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Processing Data')));
-                           database_services.addCreateToFb(iName, iAddress, iType, iHour, iPhoto, iPhone1, iPhone2);
+                           database_services.addCreateToFb(iName, iAddress, iType, iHour, iPhoto, iPhone1, iPhone2,iDesc);
                           }
 
                         },

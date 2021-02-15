@@ -14,7 +14,7 @@ class Database_Services {
 
 
   Future<void> addCreateToFb(String iName, String iAddress, String iType,
-      int iHour, File iPhoto, String iPhone1, String iPhone2) async{
+      int iHour, File iPhoto, String iPhone1, String iPhone2,String iDesc) async{
 
     final User firebaseUser = _auth.currentUser;
 
@@ -23,18 +23,21 @@ class Database_Services {
     //     .child("iPhoto");
 
 
-    String isUploaded = await uploadFile(iPhoto.path);
-    if(!(isUploaded == 'Error'))
+    String downloadURL = await uploadFile(iPhoto.path);
+    if(!(downloadURL == 'Error'))
       {
 
-       firestore.collection(firebaseUser.uid).add({
+       firestore.collection("iDetails").add({
          'iName':iName,
          'iAddress':iAddress,
          'iType':iType,
          'iHour':iHour,
-         'iPhoto':isUploaded,
+         'iPhoto':downloadURL,
          'iPhone1':iPhone1,
          'iPhone2':iPhone2,
+         'iDesc':iDesc,
+         'time':DateTime.now(),
+         'uid':firebaseUser.uid,
        }).then((value) {
           return 'Done';
        }).catchError((onError){
@@ -45,15 +48,15 @@ class Database_Services {
   }
   Future<String> uploadFile(String filePath) async {
     File file = File(filePath);
-    String d;
+    String downloadURL;
     try {
       await firebase_storage.FirebaseStorage.instance
           .ref('iPhoto')
           .child("${DateTime.now().millisecondsSinceEpoch}")
           .putFile(file).then((val) async {
-            d = await val.ref.getDownloadURL();
+            downloadURL = await val.ref.getDownloadURL();
       });
-      return d;
+      return downloadURL;
     } on FirebaseException catch (e) {
       // e.g, e.code == 'canceled'
       return "Error";

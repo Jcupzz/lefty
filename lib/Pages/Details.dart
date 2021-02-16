@@ -27,14 +27,14 @@ class _DetailsState extends State<Details> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(3,0,3,0),
+                  padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
                   child: Text(
                     widget.document.data()['iName'],
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(4,0,4,0),
+                  padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
                   child: Text(
                     widget.document.data()['iType'],
                     style: TextStyle(fontSize: 16),
@@ -51,7 +51,8 @@ class _DetailsState extends State<Details> {
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(14),
-                      image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+                      image: DecorationImage(
+                          image: imageProvider, fit: BoxFit.cover),
                     ),
                   ),
                   placeholder: ((context, s) => Center(
@@ -59,7 +60,9 @@ class _DetailsState extends State<Details> {
                       )),
                   fit: BoxFit.cover,
                 ),
-                SizedBox(height: 5,),
+                SizedBox(
+                  height: 5,
+                ),
                 // Container(
                 //   width: MediaQuery.of(context).size.width,
                 //   child: Card(
@@ -89,43 +92,65 @@ class _DetailsState extends State<Details> {
                 Card(
                   elevation: 20,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14)
-                  ),
+                      borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
-                    title: Text('Description',style: new TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 14)),
-                    subtitle: Text(widget.document.data()['iDesc'],style: new TextStyle(color: Colors.black,fontSize: 18)),
+                    title: Text('Description',
+                        style: new TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 14)),
+                    subtitle: Text(widget.document.data()['iDesc'],
+                        style:
+                            new TextStyle(color: Colors.black, fontSize: 18)),
                   ),
                 ),
                 Card(
                   elevation: 20,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14)
-                  ),
+                      borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
-                    title: Text('Address',style: new TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 14)),
-                    subtitle: Text(widget.document.data()['iAddress'],style: new TextStyle(color: Colors.black,fontSize: 18)),
+                    title: Text('Address',
+                        style: new TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 14)),
+                    subtitle: Text(widget.document.data()['iAddress'],
+                        style:
+                            new TextStyle(color: Colors.black, fontSize: 18)),
                   ),
                 ),
                 Card(
                   elevation: 20,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14)
-                  ),
+                      borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
-                    trailing: IconButton(icon: Icon(Icons.phone), onPressed: (){}),
-                    title: Text('Primary Contact',style: new TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 14)),
-                    subtitle: Text(widget.document.data()['iPhone1'],style: new TextStyle(color: Colors.black,fontSize: 18)),
+                    trailing:
+                        IconButton(icon: Icon(Icons.phone), onPressed: () {}),
+                    title: Text('Primary Contact',
+                        style: new TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 14)),
+                    subtitle: Text(widget.document.data()['iPhone1'],
+                        style:
+                            new TextStyle(color: Colors.black, fontSize: 18)),
                   ),
                 ),
                 Card(
                   elevation: 20,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14)
-                  ),
+                      borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
-                    trailing: IconButton(icon: Icon(Icons.phone), onPressed: (){}),
-                    title: Text('Secondary Contact',style: new TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 14)),
-                    subtitle: Text(widget.document.data()['iPhone2'],style: new TextStyle(color: Colors.black,fontSize: 18)),
+                    trailing:
+                        IconButton(icon: Icon(Icons.phone), onPressed: () {}),
+                    title: Text('Secondary Contact',
+                        style: new TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 14)),
+                    subtitle: Text(widget.document.data()['iPhone2'],
+                        style:
+                            new TextStyle(color: Colors.black, fontSize: 18)),
                   ),
                 ),
               ],

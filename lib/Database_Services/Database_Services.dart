@@ -13,9 +13,14 @@ class Database_Services {
   //     firebase_storage.FirebaseStorage.instance;
 
   Future<void> addCreateToFb(
-      String iName, String iAddress, String iType, File iPhoto, String iPhone1, String iPhone2, String iDesc,bool isRequested) async {
-
-
+      String iName,
+      String iAddress,
+      String iType,
+      File iPhoto,
+      String iPhone1,
+      String iPhone2,
+      String iDesc,
+      bool isRequested) async {
     String downloadURL;
     int iHour = 0;
     final User firebaseUser = _auth.currentUser;
@@ -42,7 +47,7 @@ class Database_Services {
         'iPhone1': iPhone1,
         'iPhone2': iPhone2,
         'iDesc': iDesc,
-        'isRequested':isRequested,
+        'isRequested': isRequested,
         'time': DateTime.now(),
         'uid': firebaseUser.uid,
       }).then((value) {
@@ -50,7 +55,6 @@ class Database_Services {
       }).catchError((onError) {
         return 'Error';
       });
-
     }
   }
 

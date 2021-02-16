@@ -11,15 +11,15 @@ class AuthenticationService {
     try {
       await firebaseAuth.signOut();
       return "Signed out";
-    }on FirebaseAuthException catch(e){
+    } on FirebaseAuthException catch (e) {
       return e.message;
     }
   }
 
   Future<String> signIn({String email, String password}) async {
     try {
-      await firebaseAuth
-          .signInWithEmailAndPassword(email: email, password: password);
+      await firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
       return "Signed in";
     } on FirebaseAuthException catch (e) {
       return e.message;

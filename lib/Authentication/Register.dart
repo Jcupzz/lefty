@@ -193,7 +193,10 @@ class _RegisterState extends State<Register> {
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                                  child: Text("Sign up",style: TextStyle(color: Colors.white),),
+                                  child: Text(
+                                    "Sign up",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
                               ),
                             ),

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lefty/Database_Services/Database_Services.dart';
+import 'package:lefty/Pages/Select_Location.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 class Register_Institute extends StatefulWidget {
@@ -51,7 +52,10 @@ class _Register_InstituteState extends State<Register_Institute> {
                 children: [
                   Text(
                     "Register Institute",
-                    style: TextStyle(color: Colors.black, fontSize: 40, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold),
                   ),
                   Divider(
                     color: Colors.black,
@@ -61,7 +65,8 @@ class _Register_InstituteState extends State<Register_Institute> {
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Institution Name",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
                   TextFormField(
@@ -74,18 +79,19 @@ class _Register_InstituteState extends State<Register_Institute> {
                       }
                       return null;
                     },
-
                     controller: iNameController,
                     decoration: InputDecoration(
                       fillColor: Colors.white,
                       hintText: "Institution Name",
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide:
+                            BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide:
+                            BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -97,7 +103,8 @@ class _Register_InstituteState extends State<Register_Institute> {
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Institution Address",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
                   TextFormField(
@@ -119,11 +126,13 @@ class _Register_InstituteState extends State<Register_Institute> {
                       fillColor: Colors.white,
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide:
+                            BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide:
+                            BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -135,11 +144,14 @@ class _Register_InstituteState extends State<Register_Institute> {
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Institution Type",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Container(
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), border: Border.all(width: 1)),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(width: 1)),
                     width: MediaQuery.of(context).size.width,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -229,7 +241,8 @@ class _Register_InstituteState extends State<Register_Institute> {
                     padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                     child: Text(
                       "Enter Description",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
                   TextFormField(
@@ -251,11 +264,13 @@ class _Register_InstituteState extends State<Register_Institute> {
                       fillColor: Colors.white,
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide:
+                            BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide:
+                            BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -267,7 +282,8 @@ class _Register_InstituteState extends State<Register_Institute> {
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Select image of the institute (optional)",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
                   InkWell(
@@ -289,11 +305,26 @@ class _Register_InstituteState extends State<Register_Institute> {
                               : Image.file(iPhoto)),
                     ),
                   ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => Select_Location()));
+                    },
+                    child: Text("Select Location"),
+                    style: ButtonStyle(
+                      elevation: MaterialStateProperty.all(20),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Colors.blueGrey[900]),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Primary Contact Number",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
                   TextFormField(
@@ -312,11 +343,13 @@ class _Register_InstituteState extends State<Register_Institute> {
                       fillColor: Colors.white,
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide:
+                            BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide:
+                            BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -328,7 +361,8 @@ class _Register_InstituteState extends State<Register_Institute> {
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Secondary Contact Number",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
                   TextFormField(
@@ -347,11 +381,13 @@ class _Register_InstituteState extends State<Register_Institute> {
                       fillColor: Colors.white,
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide:
+                            BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide:
+                            BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -385,15 +421,20 @@ class _Register_InstituteState extends State<Register_Institute> {
                                 break;
                             }
 
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Processing Data')));
-                            database_services.addCreateToFb(iName, iAddress, iType, iPhoto, iPhone1, iPhone2, iDesc,false);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Processing Data')));
+                            database_services.addCreateToFb(iName, iAddress,
+                                iType, iPhoto, iPhone1, iPhone2, iDesc, false);
                           }
                         },
                         child: Text("Done"),
                         style: ButtonStyle(
                           elevation: MaterialStateProperty.all(20),
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
-                          backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey[900]),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20))),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.blueGrey[900]),
                         ),
                       ),
                     ),

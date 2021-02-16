@@ -21,8 +21,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [Provider<AuthenticationService>(create: (_)=>AuthenticationService(FirebaseAuth.instance)),
-          StreamProvider(create: (context)=>context.read<AuthenticationService>().authStateChanges,)
+        providers: [
+          Provider<AuthenticationService>(
+              create: (_) => AuthenticationService(FirebaseAuth.instance)),
+          StreamProvider(
+            create: (context) =>
+                context.read<AuthenticationService>().authStateChanges,
+          )
         ],
         child: MaterialApp(
             builder: BotToastInit(),
@@ -36,24 +41,19 @@ class MyApp extends StatelessWidget {
             }));
   }
 }
+
 //
 class AuthenticationWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     final firebaseUser = context.watch<User>();
     print(firebaseUser);
     if (firebaseUser == null) {
       isVerified = false;
       return MyBottomNavigationBar();
-
-    }
-    else{
+    } else {
       isVerified = true;
       return MyBottomNavigationBar();
     }
-
-
-
   }
 }

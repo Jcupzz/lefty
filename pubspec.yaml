@@ -22,11 +22,17 @@ dependencies:
   image_picker: ^0.6.7+22
   firebase_storage: ^7.0.0
   cached_network_image: ^2.5.0
-  flutter_countdown_timer: ^3.0.0
-  timer_count_down: ^1.0.4+1
+  google_maps_flutter: ^1.2.0
+  http: ^0.12.0+1
+  json_serializable: ^3.3.0
+  location: ^3.2.4
+  geolocator: ^6.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  pedantic: ^1.9.0
+  build_runner: ^1.10.0
+
 flutter:
   uses-material-design: true

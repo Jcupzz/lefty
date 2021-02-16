@@ -12,15 +12,8 @@ class Database_Services {
   // firebase_storage.FirebaseStorage _storage =
   //     firebase_storage.FirebaseStorage.instance;
 
-  Future<void> addCreateToFb(
-      String iName,
-      String iAddress,
-      String iType,
-      File iPhoto,
-      String iPhone1,
-      String iPhone2,
-      String iDesc,
-      bool isRequested) async {
+  Future<void> addCreateToFb(String iName, String iAddress, String iType, File iPhoto, String iPhone1, String iPhone2,
+      String iDesc, bool isRequested, String lat, String long) async {
     String downloadURL;
     int iHour = 0;
     final User firebaseUser = _auth.currentUser;
@@ -31,15 +24,14 @@ class Database_Services {
       downloadURL = await uploadFile(iPhoto.path);
     }
 
-    CollectionReference collectionReference1 =
-        FirebaseFirestore.instance.collection("iDetails");
+    CollectionReference collectionReference1 = FirebaseFirestore.instance.collection("iDetails");
     //CollectionReference collectionReference2 = FirebaseFirestore.instance.collection("iPublic");
     // firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
     //     .ref()
     //     .child("iPhoto");
 
     if (!(downloadURL == 'Error')) {
-      collectionReference1.add({
+      await collectionReference1.add({
         'iName': iName,
         'iAddress': iAddress,
         'iType': iType,
@@ -50,6 +42,8 @@ class Database_Services {
         'isRequested': isRequested,
         'time': DateTime.now(),
         'uid': firebaseUser.uid,
+        'lat': lat,
+        'long': long,
       }).then((value) {
         return 'Done';
       }).catchError((onError) {

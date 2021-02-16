@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lefty/Database_Services/Database_Services.dart';
 import 'package:lefty/Pages/Select_Location.dart';
+import 'package:lefty/main.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 class Register_Institute extends StatefulWidget {
@@ -35,9 +38,13 @@ class _Register_InstituteState extends State<Register_Institute> {
       }
     });
   }
-
+  double lati,longi;
   @override
   Widget build(BuildContext context) {
+    if(lat!=null&&long!=null){
+        lati = double.parse(lat);
+        longi = double.parse(long);
+      }
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -319,6 +326,21 @@ class _Register_InstituteState extends State<Register_Institute> {
                           Colors.blueGrey[900]),
                     ),
                   ),
+                  lat!=null?
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.width*0.5,
+                    child: GoogleMap(
+                      initialCameraPosition: CameraPosition(
+                        target: LatLng(lati,longi),
+                        zoom: 50,
+                      ),
+                    ),
+                  ):SizedBox(),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
@@ -423,8 +445,13 @@ class _Register_InstituteState extends State<Register_Institute> {
 
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text('Processing Data')));
-                            database_services.addCreateToFb(iName, iAddress,
-                                iType, iPhoto, iPhone1, iPhone2, iDesc, false);
+                            if(lat!=null&&long!=null){
+                              database_services.addCreateToFb(iName, iAddress,
+                                  iType, iPhoto, iPhone1, iPhone2, iDesc, false,lat,long);
+                            }
+                            else{
+                              BotToast.showText(text: "Error while uploading Location...Try Again!!!");
+                            }
                           }
                         },
                         child: Text("Done"),

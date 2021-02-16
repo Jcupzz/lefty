@@ -44,8 +44,10 @@ class _Select_LocationState extends State<Select_Location> {
           title: Text('Maps Sample App'),
           backgroundColor: Colors.green[700],
         ),
-        body: GoogleMap(
+        body: currentPostion != null ? GoogleMap(
           mapToolbarEnabled: true,
+          buildingsEnabled: true,
+          tiltGesturesEnabled: true,
           myLocationButtonEnabled: true,
           myLocationEnabled: true,
           onMapCreated: _onMapCreated,
@@ -53,7 +55,7 @@ class _Select_LocationState extends State<Select_Location> {
             target: currentPostion,
             zoom: 10,
           ),
-        ),
+        ):Container(),
       ),
     );
   }

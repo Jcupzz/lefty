@@ -38,7 +38,6 @@ class Database_Services {
         'iName': iName,
         'iAddress': iAddress,
         'iType': iType,
-        'iHour': iHour,
         'iPhoto': downloadURL,
         'iPhone1': iPhone1,
         'iPhone2': iPhone2,

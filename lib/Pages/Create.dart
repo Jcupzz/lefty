@@ -25,7 +25,6 @@ class Create extends StatefulWidget {
 
 class _CreateState extends State<Create> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  int iHour = 1;
   String timer;
 
   @override

@@ -26,13 +26,19 @@ class _DetailsState extends State<Details> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  widget.document.data()['iName'],
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(3,0,3,0),
+                  child: Text(
+                    widget.document.data()['iName'],
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
+                  ),
                 ),
-                Text(
-                  widget.document.data()['iType'],
-                  style: TextStyle(fontSize: 18),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(4,0,4,0),
+                  child: Text(
+                    widget.document.data()['iType'],
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ),
                 SizedBox(
                   height: 10,
@@ -87,7 +93,7 @@ class _DetailsState extends State<Details> {
                   ),
                   child: ListTile(
                     title: Text('Description',style: new TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 14)),
-                    subtitle: Text(widget.document.data()['iDesc'],style: new TextStyle(color: Colors.black,fontSize: 20)),
+                    subtitle: Text(widget.document.data()['iDesc'],style: new TextStyle(color: Colors.black,fontSize: 18)),
                   ),
                 ),
                 Card(
@@ -96,8 +102,30 @@ class _DetailsState extends State<Details> {
                       borderRadius: BorderRadius.circular(14)
                   ),
                   child: ListTile(
-                    title: Text('Description',style: new TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 14)),
-                    subtitle: Text(widget.document.data()['iDesc'],style: new TextStyle(color: Colors.black,fontSize: 20)),
+                    title: Text('Address',style: new TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 14)),
+                    subtitle: Text(widget.document.data()['iAddress'],style: new TextStyle(color: Colors.black,fontSize: 18)),
+                  ),
+                ),
+                Card(
+                  elevation: 20,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14)
+                  ),
+                  child: ListTile(
+                    trailing: IconButton(icon: Icon(Icons.phone), onPressed: (){}),
+                    title: Text('Primary Contact',style: new TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 14)),
+                    subtitle: Text(widget.document.data()['iPhone1'],style: new TextStyle(color: Colors.black,fontSize: 18)),
+                  ),
+                ),
+                Card(
+                  elevation: 20,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14)
+                  ),
+                  child: ListTile(
+                    trailing: IconButton(icon: Icon(Icons.phone), onPressed: (){}),
+                    title: Text('Secondary Contact',style: new TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 14)),
+                    subtitle: Text(widget.document.data()['iPhone2'],style: new TextStyle(color: Colors.black,fontSize: 18)),
                   ),
                 ),
               ],

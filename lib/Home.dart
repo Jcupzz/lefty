@@ -18,7 +18,7 @@ class _HomeState extends State<Home> {
     final firebaseUser = context.watch<User>();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey[900],
+        backgroundColor: Colors.black,
         title: Text("Lefty.",style: TextStyle(color: Colors.white),),
         centerTitle: true,
         actions: [

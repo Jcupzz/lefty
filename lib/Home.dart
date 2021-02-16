@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lefty/Pages/Details.dart';
 import 'package:lefty/static/Loading.dart';
 import 'package:provider/provider.dart';
 import 'package:lefty/Authentication/Authentication_Services.dart';
@@ -36,7 +37,7 @@ class _HomeState extends State<Home> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: StreamBuilder<QuerySnapshot>(
-            stream: firestore.collection("iDetails").snapshots(),
+            stream: firestore.collection("iDetails").where('isRequested',isEqualTo: true).snapshots(),
             builder: (BuildContext context,
                 AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) {
@@ -56,7 +57,8 @@ class _HomeState extends State<Home> {
                               BorderRadius.circular(14.0)),
                           child: ListTile(
                             onTap: (){
-                              //Navigator.push(context, MaterialPageRoute(builder: (_)=>Edit_Text(document)));
+
+                              Navigator.push(context, MaterialPageRoute(builder: (_)=>Details(document)));
                             },
                             onLongPress: () {
                               //showDeleteDialog(document);

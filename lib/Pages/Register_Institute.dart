@@ -386,7 +386,7 @@ class _Register_InstituteState extends State<Register_Institute> {
                             }
 
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Processing Data')));
-                            database_services.addCreateToFb(iName, iAddress, iType, iPhoto, iPhone1, iPhone2, iDesc);
+                            database_services.addCreateToFb(iName, iAddress, iType, iPhoto, iPhone1, iPhone2, iDesc,false);
                           }
                         },
                         child: Text("Done"),

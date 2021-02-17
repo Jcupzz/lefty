@@ -36,7 +36,7 @@ class _LocationState extends State<Location> {
   void _getAllLatLongFromFb() async {
     await collectionReference1.get().then((QuerySnapshot querySnapshot) =>
         querySnapshot.docs.forEach((doc) {
-          myMarker.add(Marker(markerId: MarkerId(doc['lat'].toString()), position:LatLng(doc['lat'],doc['long']),infoWindow: InfoWindow(title: doc['iName'])));
+          myMarker.add(Marker(markerId: MarkerId(LatLng(doc['lat'], doc['long']).toString()), position:LatLng(doc['lat'],doc['long']),infoWindow: InfoWindow(title: doc['iName'])));
         }));
   }
 

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Details extends StatefulWidget {
   DocumentSnapshot document;
@@ -14,6 +15,16 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
+  List<Marker> myMarker = [];
+  @override
+  void initState() {
+    super.initState();
+
+    myMarker.add(
+        Marker(markerId: MarkerId(LatLng(widget.document['lat'], widget.document['long']).toString()), position: LatLng(widget.document['lat'], widget.document['long'])));
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,17 +56,25 @@ class _DetailsState extends State<Details> {
                 ),
                 CachedNetworkImage(
                   imageUrl: widget.document.data()['iPhoto'],
-                  imageBuilder: (context, imageProvider) => Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.width * 0.75,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(14),
-                      image: DecorationImage(
-                          image: imageProvider, fit: BoxFit.cover),
-                    ),
-                  ),
-                  placeholder: ((context, s) => Center(
+                  imageBuilder: (context, imageProvider) =>
+                      Container(
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width,
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .width * 0.75,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(14),
+                          image: DecorationImage(
+                              image: imageProvider, fit: BoxFit.cover),
+                        ),
+                      ),
+                  placeholder: ((context, s) =>
+                      Center(
                         child: CircularProgressIndicator(),
                       )),
                   fit: BoxFit.cover,
@@ -95,13 +114,13 @@ class _DetailsState extends State<Details> {
                       borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
                     title: Text('Description',
-                        style:  TextStyle(
+                        style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                             fontSize: 14)),
                     subtitle: Text(widget.document.data()['iDesc'],
                         style:
-                             TextStyle(color: Colors.black, fontSize: 18)),
+                        TextStyle(color: Colors.black, fontSize: 18)),
                   ),
                 ),
                 Card(
@@ -110,13 +129,27 @@ class _DetailsState extends State<Details> {
                       borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
                     title: Text('Address',
-                        style:  TextStyle(
+                        style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                             fontSize: 14)),
                     subtitle: Text(widget.document.data()['iAddress'],
                         style:
-                             TextStyle(color: Colors.black, fontSize: 18)),
+                        TextStyle(color: Colors.black, fontSize: 18)),
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(),
+                    borderRadius: BorderRadius.circular(14)
+                  ),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.width,
+                  child: GoogleMap(initialCameraPosition: CameraPosition(
+                    target: LatLng(widget.document['lat'], widget.document['long']),
+                    zoom: 11,
+                  ),
+                    markers:Set.from(myMarker),
                   ),
                 ),
                 Card(
@@ -125,15 +158,15 @@ class _DetailsState extends State<Details> {
                       borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
                     trailing:
-                        IconButton(icon: Icon(Icons.phone), onPressed: () {}),
+                    IconButton(icon: Icon(Icons.phone), onPressed: () {}),
                     title: Text('Primary Contact',
-                        style:  TextStyle(
+                        style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                             fontSize: 14)),
                     subtitle: Text(widget.document.data()['iPhone1'],
                         style:
-                             TextStyle(color: Colors.black, fontSize: 18)),
+                        TextStyle(color: Colors.black, fontSize: 18)),
                   ),
                 ),
                 Card(
@@ -142,15 +175,15 @@ class _DetailsState extends State<Details> {
                       borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
                     trailing:
-                        IconButton(icon: Icon(Icons.phone), onPressed: () {}),
+                    IconButton(icon: Icon(Icons.phone), onPressed: () {}),
                     title: Text('Secondary Contact',
-                        style:  TextStyle(
+                        style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                             fontSize: 14)),
                     subtitle: Text(widget.document.data()['iPhone2'],
                         style:
-                             TextStyle(color: Colors.black, fontSize: 18)),
+                        TextStyle(color: Colors.black, fontSize: 18)),
                   ),
                 ),
               ],

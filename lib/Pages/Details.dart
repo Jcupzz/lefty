@@ -28,6 +28,7 @@ class _DetailsState extends State<Details> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -109,7 +110,7 @@ class _DetailsState extends State<Details> {
                 //       )),
                 // ),
                 Card(
-                  elevation: 20,
+                  elevation: 0,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
@@ -124,7 +125,7 @@ class _DetailsState extends State<Details> {
                   ),
                 ),
                 Card(
-                  elevation: 20,
+                  elevation: 0,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
@@ -139,21 +140,21 @@ class _DetailsState extends State<Details> {
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(),
-                    borderRadius: BorderRadius.circular(14)
-                  ),
+                  margin: EdgeInsets.fromLTRB(5, 10, 5, 10),
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.width,
-                  child: GoogleMap(initialCameraPosition: CameraPosition(
-                    target: LatLng(widget.document['lat'], widget.document['long']),
-                    zoom: 11,
-                  ),
-                    markers:Set.from(myMarker),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: GoogleMap(initialCameraPosition: CameraPosition(
+                      target: LatLng(widget.document['lat'], widget.document['long']),
+                      zoom: 11,
+                    ),
+                      markers:Set.from(myMarker),
+                    ),
                   ),
                 ),
                 Card(
-                  elevation: 20,
+                  elevation: 0,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
@@ -170,7 +171,7 @@ class _DetailsState extends State<Details> {
                   ),
                 ),
                 Card(
-                  elevation: 20,
+                  elevation: 0,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
                   child: ListTile(

@@ -95,13 +95,13 @@ class _DetailsState extends State<Details> {
                       borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
                     title: Text('Description',
-                        style: new TextStyle(
+                        style:  TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                             fontSize: 14)),
                     subtitle: Text(widget.document.data()['iDesc'],
                         style:
-                            new TextStyle(color: Colors.black, fontSize: 18)),
+                             TextStyle(color: Colors.black, fontSize: 18)),
                   ),
                 ),
                 Card(
@@ -110,13 +110,13 @@ class _DetailsState extends State<Details> {
                       borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
                     title: Text('Address',
-                        style: new TextStyle(
+                        style:  TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                             fontSize: 14)),
                     subtitle: Text(widget.document.data()['iAddress'],
                         style:
-                            new TextStyle(color: Colors.black, fontSize: 18)),
+                             TextStyle(color: Colors.black, fontSize: 18)),
                   ),
                 ),
                 Card(
@@ -127,13 +127,13 @@ class _DetailsState extends State<Details> {
                     trailing:
                         IconButton(icon: Icon(Icons.phone), onPressed: () {}),
                     title: Text('Primary Contact',
-                        style: new TextStyle(
+                        style:  TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                             fontSize: 14)),
                     subtitle: Text(widget.document.data()['iPhone1'],
                         style:
-                            new TextStyle(color: Colors.black, fontSize: 18)),
+                             TextStyle(color: Colors.black, fontSize: 18)),
                   ),
                 ),
                 Card(
@@ -144,13 +144,13 @@ class _DetailsState extends State<Details> {
                     trailing:
                         IconButton(icon: Icon(Icons.phone), onPressed: () {}),
                     title: Text('Secondary Contact',
-                        style: new TextStyle(
+                        style:  TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                             fontSize: 14)),
                     subtitle: Text(widget.document.data()['iPhone2'],
                         style:
-                            new TextStyle(color: Colors.black, fontSize: 18)),
+                             TextStyle(color: Colors.black, fontSize: 18)),
                   ),
                 ),
               ],

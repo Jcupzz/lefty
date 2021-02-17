@@ -42,7 +42,6 @@ class _Select_LocationState extends State<Select_Location> {
 
 //
   List<Marker> myMarker = [];
-  Set<Marker> marker;
   LatLng latLngs;
   @override
   Widget build(BuildContext context) {
@@ -144,23 +143,4 @@ class _Select_LocationState extends State<Select_Location> {
       latLngs = tappedPoint;
     });
  }
- String getLong(){
-    if(latLngs!=null)
-      {
-        return latLngs.longitude.toString();
-      }
-    else{
-      return 'error';
-    }
- }
-  String getLat(){
-    if(latLngs!=null)
-    {
-      return latLngs.latitude.toString();
-    }
-    else{
-      return 'error';
-    }
-  }
 }
-//error: The name 'LocationAccuracy' is defined in the libraries 'package:geolocator_platform_interface/src/enums/location_accuracy.dart' and 'package:location_platform_interface/location_platform_interface.dart (via package:location/location.dart)'. (

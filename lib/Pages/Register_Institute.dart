@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:bot_toast/bot_toast.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -25,6 +27,8 @@ class _Register_InstituteState extends State<Register_Institute> {
   int selectedValue;
   int iHour = 1;
   File iPhoto;
+  double lat;
+  double long;
   final picker = ImagePicker();
   Database_Services database_services = new Database_Services();
 
@@ -38,13 +42,11 @@ class _Register_InstituteState extends State<Register_Institute> {
       }
     });
   }
-  double lati,longi;
+
+  double lati, longi;
+
   @override
   Widget build(BuildContext context) {
-    if(lat!=null&&long!=null){
-        lati = double.parse(lat);
-        longi = double.parse(long);
-      }
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -59,10 +61,7 @@ class _Register_InstituteState extends State<Register_Institute> {
                 children: [
                   Text(
                     "Register Institute",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(color: Colors.black, fontSize: 40, fontWeight: FontWeight.bold),
                   ),
                   Divider(
                     color: Colors.black,
@@ -72,8 +71,7 @@ class _Register_InstituteState extends State<Register_Institute> {
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Institution Name",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
                   TextFormField(
@@ -92,13 +90,11 @@ class _Register_InstituteState extends State<Register_Institute> {
                       hintText: "Institution Name",
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide:
-                            BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide:
-                            BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -110,8 +106,7 @@ class _Register_InstituteState extends State<Register_Institute> {
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Institution Address",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
                   TextFormField(
@@ -133,13 +128,11 @@ class _Register_InstituteState extends State<Register_Institute> {
                       fillColor: Colors.white,
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide:
-                            BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide:
-                            BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -151,14 +144,11 @@ class _Register_InstituteState extends State<Register_Institute> {
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Institution Type",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(width: 1)),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), border: Border.all(width: 1)),
                     width: MediaQuery.of(context).size.width,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -248,8 +238,7 @@ class _Register_InstituteState extends State<Register_Institute> {
                     padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                     child: Text(
                       "Enter Description",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
                   TextFormField(
@@ -271,13 +260,11 @@ class _Register_InstituteState extends State<Register_Institute> {
                       fillColor: Colors.white,
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide:
-                            BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide:
-                            BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -289,13 +276,13 @@ class _Register_InstituteState extends State<Register_Institute> {
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Select image of the institute (optional)",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
                   InkWell(
                     onTap: () => getImage(),
                     child: Container(
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                       decoration: BoxDecoration(
                         border: Border.all(width: 1),
                         borderRadius: BorderRadius.circular(20),
@@ -312,41 +299,69 @@ class _Register_InstituteState extends State<Register_Institute> {
                               : Image.file(iPhoto)),
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => Select_Location()));
-                    },
-                    child: Text("Select Location"),
-                    style: ButtonStyle(
-                      elevation: MaterialStateProperty.all(20),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20))),
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Colors.blueGrey[900]),
+                  Divider(
+                    height: 10,
+                    color: Colors.black,
+                    thickness: 0,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                    child: Text(
+                      "Select Institute Location",
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  lat!=null?
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.width*0.5,
-                    child: GoogleMap(
-                      initialCameraPosition: CameraPosition(
-                        target: LatLng(lati,longi),
-                        zoom: 50,
-                      ),
-                    ),
-                  ):SizedBox(),
+                  isLocationSelected
+                      ? Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 50,
+                          margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                          child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (_) => Select_Location()));
+                                setState(() {
+                                });
+                              },
+                              child: Text("Location Selected"),
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.green,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))),
+                        )
+                      : Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 50,
+                          margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                          child: ElevatedButton(
+                              onPressed: () async{
+                               var result = await Navigator.push(context, MaterialPageRoute(builder: (_) => Select_Location()));
+                               if(result!=null){
+                                 print('result is:');
+                                 print(result);
+                                 LatLng df;
+                                 df = result;
+                                 lat = df.latitude;
+                                 long = df.longitude;
+                                 setState(() {
+                                 });
+                               }
+                              },
+                              child: Text("Select Location"),
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.black,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))),
+                        ),
+                  Divider(
+                    height: 10,
+                    color: Colors.black,
+                    thickness: 0,
+                  ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Primary Contact Number",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
                   TextFormField(
@@ -365,13 +380,11 @@ class _Register_InstituteState extends State<Register_Institute> {
                       fillColor: Colors.white,
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide:
-                            BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide:
-                            BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -383,8 +396,7 @@ class _Register_InstituteState extends State<Register_Institute> {
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Secondary Contact Number",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
                   TextFormField(
@@ -403,13 +415,11 @@ class _Register_InstituteState extends State<Register_Institute> {
                       fillColor: Colors.white,
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide:
-                            BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
-                        borderSide:
-                            BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -442,26 +452,21 @@ class _Register_InstituteState extends State<Register_Institute> {
                                 iType = "Others";
                                 break;
                             }
-
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Processing Data')));
-                            if(lat!=null&&long!=null){
-                              database_services.addCreateToFb(iName, iAddress,
-                                  iType, iPhoto, iPhone1, iPhone2, iDesc, false,lat,long);
+                            if(lat==null&&long==null){
+                              BotToast.showText(text: "Please select institute location");
                             }
                             else{
-                              BotToast.showText(text: "Error while uploading Location...Try Again!!!");
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Processing Data')));
+                              database_services.addCreateToFb(
+                                  iName, iAddress, iType, iPhoto, iPhone1, iPhone2, iDesc, false, lat, long);
                             }
                           }
                         },
                         child: Text("Done"),
                         style: ButtonStyle(
                           elevation: MaterialStateProperty.all(20),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20))),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.blueGrey[900]),
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+                          backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey[900]),
                         ),
                       ),
                     ),
@@ -474,4 +479,6 @@ class _Register_InstituteState extends State<Register_Institute> {
       ),
     );
   }
+
+
 }

@@ -8,12 +8,13 @@ import 'package:flutter/material.dart';
 class Database_Services {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   FirebaseAuth _auth = FirebaseAuth.instance;
+  CollectionReference collectionReference1 = FirebaseFirestore.instance.collection("iDetails");
 
   // firebase_storage.FirebaseStorage _storage =
   //     firebase_storage.FirebaseStorage.instance;
 
   Future<void> addCreateToFb(String iName, String iAddress, String iType, File iPhoto, String iPhone1, String iPhone2,
-      String iDesc, bool isRequested, String lat, String long) async {
+      String iDesc, bool isRequested, double lat, double long) async {
     String downloadURL;
     int iHour = 0;
     final User firebaseUser = _auth.currentUser;
@@ -24,7 +25,6 @@ class Database_Services {
       downloadURL = await uploadFile(iPhoto.path);
     }
 
-    CollectionReference collectionReference1 = FirebaseFirestore.instance.collection("iDetails");
     //CollectionReference collectionReference2 = FirebaseFirestore.instance.collection("iPublic");
     // firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
     //     .ref()

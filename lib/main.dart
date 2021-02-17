@@ -11,8 +11,7 @@ import 'package:lefty/SplashScreen.dart';
 import 'package:provider/provider.dart';
 
 bool isVerified = false;
-String lat;
-String long;
+bool isLocationSelected = false;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

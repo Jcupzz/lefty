@@ -83,12 +83,16 @@ class _Select_LocationState extends State<Select_Location> {
                       onPressed: () async{
                         if(latLngs!=null)
                           {
-                            lat = latLngs.latitude.toString();
-                            long = latLngs.longitude.toString();
-                            Navigator.pop(context);
+                            setState(() {
+                              isLocationSelected = true;
+                            });
+                            Navigator.pop(context,latLngs);
                           }
                         else{
                           BotToast.showText(text: "Tap on screen to select institute location");
+                          setState(() {
+                            isLocationSelected = false;
+                          });
                         }
                       },
                       child: Text("Done",style: TextStyle(color: Colors.white),),
@@ -114,17 +118,20 @@ class _Select_LocationState extends State<Select_Location> {
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
+      BotToast.showText(text: 'Location services are disabled');
       return Future.error('Location services are disabled.');
     }
 
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.deniedForever) {
+      BotToast.showText(text: 'Location permissions are permantly denied, we cannot request permissions');
       return Future.error('Location permissions are permantly denied, we cannot request permissions.');
     }
 
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission != LocationPermission.whileInUse && permission != LocationPermission.always) {
+        BotToast.showText(text: 'Location permissions are denied (actual value: $permission)');
         return Future.error('Location permissions are denied (actual value: $permission).');
       }
     }
@@ -137,6 +144,23 @@ class _Select_LocationState extends State<Select_Location> {
       latLngs = tappedPoint;
     });
  }
-
+ String getLong(){
+    if(latLngs!=null)
+      {
+        return latLngs.longitude.toString();
+      }
+    else{
+      return 'error';
+    }
+ }
+  String getLat(){
+    if(latLngs!=null)
+    {
+      return latLngs.latitude.toString();
+    }
+    else{
+      return 'error';
+    }
+  }
 }
 //error: The name 'LocationAccuracy' is defined in the libraries 'package:geolocator_platform_interface/src/enums/location_accuracy.dart' and 'package:location_platform_interface/location_platform_interface.dart (via package:location/location.dart)'. (

@@ -56,6 +56,7 @@ class _DetailsState extends State<Details> {
                   height: 10,
                 ),
                 CachedNetworkImage(
+
                   imageUrl: widget.document.data()['iPhoto'],
                   imageBuilder: (context, imageProvider) =>
                       Container(

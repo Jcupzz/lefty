@@ -23,12 +23,11 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    HapticFeedback.heavyImpact();
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
+backgroundColor: Colors.white,
         animationCurve: Curves.bounceInOut,
         animationDuration: Duration(milliseconds: 200),
-        backgroundColor: Colors.white,
         color: Colors.black,
         buttonBackgroundColor: Colors.black,
         height: 60,

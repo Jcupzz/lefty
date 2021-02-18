@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -56,10 +57,10 @@ class _DetailsState extends State<Details> {
                   height: 10,
                 ),
                 CachedNetworkImage(
-
                   imageUrl: widget.document.data()['iPhoto'],
                   imageBuilder: (context, imageProvider) =>
                       Container(
+                        margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
                         width: MediaQuery
                             .of(context)
                             .size
@@ -130,12 +131,12 @@ class _DetailsState extends State<Details> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
-                    title: Text('Address',
+                    title: Text('\nAddress',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                             fontSize: 14)),
-                    subtitle: Text(widget.document.data()['iAddress'],
+                    subtitle: Text(widget.document.data()['iAddress']+'\n',
                         style:
                         TextStyle(color: Colors.black, fontSize: 18)),
                   ),

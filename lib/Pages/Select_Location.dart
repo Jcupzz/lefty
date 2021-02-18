@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lefty/main.dart';
+import 'package:lefty/static/Circular_Loading.dart';
 
 class Select_Location extends StatefulWidget {
   @override
@@ -47,10 +48,6 @@ class _Select_LocationState extends State<Select_Location> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Maps Sample App'),
-          backgroundColor: Colors.green[700],
-        ),
         body: currentPostion != null ? Stack(
           children: [
 
@@ -82,16 +79,10 @@ class _Select_LocationState extends State<Select_Location> {
                       onPressed: () async{
                         if(latLngs!=null)
                           {
-                            setState(() {
-                              isLocationSelected = true;
-                            });
                             Navigator.pop(context,latLngs);
                           }
                         else{
                           BotToast.showText(text: "Tap on screen to select institute location");
-                          setState(() {
-                            isLocationSelected = false;
-                          });
                         }
                       },
                       child: Text("Done",style: TextStyle(color: Colors.white),),
@@ -102,7 +93,7 @@ class _Select_LocationState extends State<Select_Location> {
             )
 
           ],
-        ):Container(),
+        ):Circular_Loading(),
       ),
     );
   }

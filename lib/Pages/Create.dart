@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lefty/Authentication/Register.dart';
 import 'package:lefty/Database_Services/Database_Services.dart';
 import 'package:lefty/Pages/Request.dart';
 import 'package:lefty/main.dart';
@@ -27,9 +28,27 @@ class _CreateState extends State<Create> {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
-    String fUserUid = firebaseUser.uid;
     return !(isVerified)
-        ? Loading()
+        ? AlertDialog(
+                backgroundColor: Colors.grey[100],
+                title: Text("Sign in"),
+                content: Text("Please Sign in to register an institute"),
+                actions: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14)
+                        )
+                      ),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (_) => Register()));
+                        },
+                        child: Text("Ok")),
+                  )
+                ],
+              )
         : Scaffold(
             backgroundColor: Colors.white,
             body: SafeArea(
@@ -42,10 +61,7 @@ class _CreateState extends State<Create> {
                   children: [
                     Text(
                       "Create",
-                      style: TextStyle(
-                          fontSize: 50,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 50, color: Colors.black, fontWeight: FontWeight.bold),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
@@ -58,15 +74,11 @@ class _CreateState extends State<Create> {
                         height: 50,
                         child: ElevatedButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => Register_Institute()));
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => Register_Institute()));
                             },
                             style: ElevatedButton.styleFrom(
                               elevation: 20,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                               primary: Colors.black,
                             ),
                             // style: ButtonStyle(
@@ -81,95 +93,62 @@ class _CreateState extends State<Create> {
                       ),
                     ),
                     StreamBuilder<QuerySnapshot>(
-                        stream: firestore
-                            .collection("iDetails")
-                            .where('uid', isEqualTo: fUserUid)
-                            .snapshots(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<QuerySnapshot> snapshot) {
+
+                        stream: firestore.collection("iDetails").where('uid', isEqualTo: firebaseUser.uid).snapshots(),
+                        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                           if (!snapshot.hasData) {
                             return Loading();
                           } else {
                             return Expanded(
                               child: ListView(
                                 shrinkWrap: true,
-                                children: snapshot.data.docs
-                                    .map((DocumentSnapshot document) {
+                                children: snapshot.data.docs.map((DocumentSnapshot document) {
                                   return Card(
                                       color: Colors.white,
                                       elevation: 20,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(14.0)),
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
                                       child: ListTile(
                                         onTap: () {},
                                         onLongPress: () {
                                           //showDeleteDialog(document);
                                         },
                                         title: Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              0, 5, 5, 5),
+                                          padding: const EdgeInsets.fromLTRB(0, 5, 5, 5),
                                           child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 document.data()['iName'],
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                    letterSpacing: 1),
+                                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, letterSpacing: 1),
                                               ),
                                               Padding(
-                                                padding:
-                                                    const EdgeInsets.fromLTRB(
-                                                        0, 10, 0, 0),
+                                                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                                                 child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
                                                     Flexible(
                                                       flex: 1,
                                                       child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        mainAxisSize: MainAxisSize.max,
                                                         children: [
                                                           Text(
-                                                            document.data()[
-                                                                'iDesc'],
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black),
+                                                            document.data()['iDesc'],
+                                                            style: TextStyle(color: Colors.black),
                                                           ),
                                                           Text(
-                                                            document.data()[
-                                                                'iAddress'],
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black),
+                                                            document.data()['iAddress'],
+                                                            style: TextStyle(color: Colors.black),
                                                           ),
                                                           Text(
-                                                            document.data()[
-                                                                'iPhone1'],
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black),
+                                                            document.data()['iPhone1'],
+                                                            style: TextStyle(color: Colors.black),
                                                           ),
                                                           Text(
-                                                            document.data()[
-                                                                'iPhone2'],
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black),
+                                                            document.data()['iPhone2'],
+                                                            style: TextStyle(color: Colors.black),
                                                           ),
                                                         ],
                                                       ),
@@ -177,34 +156,19 @@ class _CreateState extends State<Create> {
                                                     Flexible(
                                                       flex: 1,
                                                       child: CachedNetworkImage(
-                                                        imageUrl: document
-                                                            .data()['iPhoto'],
-                                                        imageBuilder: (context,
-                                                                imageProvider) =>
-                                                            Container(
+                                                        imageUrl: document.data()['iPhoto'],
+                                                        imageBuilder: (context, imageProvider) => Container(
                                                           width: 180.0,
                                                           height: 120.0,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            shape: BoxShape
-                                                                .rectangle,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        20),
-                                                            image: DecorationImage(
-                                                                image:
-                                                                    imageProvider,
-                                                                fit: BoxFit
-                                                                    .cover),
+                                                          decoration: BoxDecoration(
+                                                            shape: BoxShape.rectangle,
+                                                            borderRadius: BorderRadius.circular(20),
+                                                            image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
                                                           ),
                                                         ),
-                                                        placeholder:
-                                                            ((context, s) =>
-                                                                Center(
-                                                                  child:
-                                                                      CircularProgressIndicator(),
-                                                                )),
+                                                        placeholder: ((context, s) => Center(
+                                                              child: CircularProgressIndicator(),
+                                                            )),
                                                         fit: BoxFit.cover,
                                                       ),
                                                     ),
@@ -212,77 +176,47 @@ class _CreateState extends State<Create> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding:
-                                                    const EdgeInsets.fromLTRB(
-                                                        0, 10, 0, 0),
+                                                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                                                 child: Container(
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  child: document
-                                                          .data()['isRequested']
+                                                  width: MediaQuery.of(context).size.width,
+                                                  child: document.data()['isRequested']
                                                       ? ElevatedButton(
                                                           onPressed: () async {
                                                             await firestore
-                                                                .collection(
-                                                                    "iDetails")
-                                                                .doc(
-                                                                    document.id)
-                                                                .update({
-                                                              'isRequested':
-                                                                  false
-                                                            });
+                                                                .collection("iDetails")
+                                                                .doc(document.id)
+                                                                .update({'isRequested': false});
                                                             //showRequestDialog(document, firebaseUser);
                                                           },
                                                           child: Text(
                                                             "Cancel Request",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white),
+                                                            style: TextStyle(color: Colors.white),
                                                           ),
-                                                          style: ElevatedButton
-                                                              .styleFrom(
+                                                          style: ElevatedButton.styleFrom(
                                                             primary: Colors.red,
                                                             elevation: 10,
-                                                            shape:
-                                                                RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          20),
+                                                            shape: RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius.circular(20),
                                                             ),
                                                           ),
                                                         )
                                                       : ElevatedButton(
                                                           onPressed: () async {
                                                             await firestore
-                                                                .collection(
-                                                                    "iDetails")
-                                                                .doc(
-                                                                    document.id)
-                                                                .update({
-                                                              'isRequested':
-                                                                  true
-                                                            });
+                                                                .collection("iDetails")
+                                                                .doc(document.id)
+                                                                .update({'isRequested': true});
                                                             //showRequestDialog(document, firebaseUser);
                                                           },
                                                           child: Text(
                                                             "Create Request",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white),
+                                                            style: TextStyle(color: Colors.white),
                                                           ),
-                                                          style: ElevatedButton
-                                                              .styleFrom(
-                                                            primary:
-                                                                Colors.black,
+                                                          style: ElevatedButton.styleFrom(
+                                                            primary: Colors.black,
                                                             elevation: 10,
-                                                            shape:
-                                                                RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          20),
+                                                            shape: RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius.circular(20),
                                                             ),
                                                           ),
                                                         ),

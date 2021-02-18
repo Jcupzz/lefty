@@ -2,7 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:lefty/MyBottomNavigationBar.dart';
 import 'package:lefty/Pages/Details.dart';
+import 'package:lefty/main.dart';
 import 'package:lefty/static/Loading.dart';
 import 'package:provider/provider.dart';
 import 'package:lefty/Authentication/Authentication_Services.dart';
@@ -13,6 +16,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int selectedValue;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
@@ -20,21 +24,46 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
+        elevation: 0,
         title: Text(
           "Lefty.",
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
         actions: [
-          IconButton(
-              icon: Icon(Icons.follow_the_signs_outlined),
-              onPressed: () async {
+          // IconButton(
+          //     icon: Icon(Icons.more_vert_rounded),
+          //     onPressed: () async {
+          //
+          //       // dynamic isLoggedOut =
+          //       //     await context.read<AuthenticationService>().signOut();
+          //       // if (isLoggedOut.toString() == "Signed out") {
+          //       //   setState(() {
+          //       //     isVerified = false;
+          //       //   });
+          //       //   SystemNavigator.pop();
+          //       // }
+          //     }),
+          PopupMenuButton(itemBuilder: (context){
+            return List.generate(1, (index) {
+              return PopupMenuItem(child: Text('SignOut'),value: 1,);
+            });
+          },
+            icon: Icon(Icons.more_vert_rounded),
+            onSelected: (index) async {
+              if (index == 1) {
                 dynamic isLoggedOut =
-                    await context.read<AuthenticationService>().signOut();
+                await context.read<AuthenticationService>().signOut();
                 if (isLoggedOut.toString() == "Signed out") {
-                  Navigator.pushReplacementNamed(context, "/Register");
+                  setState(() {
+                    isVerified = false;
+                  });
+                  print("Signed Outt");
+                  SystemNavigator.pop();
                 }
-              }),
+              }
+            }
+          ),
         ],
       ),
       body: Container(

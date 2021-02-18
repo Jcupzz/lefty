@@ -153,7 +153,9 @@ class _RegisterState extends State<Register> {
                                         .signUp(
                                             email: email, password: password);
                                     if (isSuccess.toString() == "Signed up") {
-                                      isVerified = true;
+                                      setState(() {
+                                        isVerified = true;
+                                      });
                                       Navigator.pushReplacementNamed(
                                           context, '/Home');
                                       BotToast.showSimpleNotification(

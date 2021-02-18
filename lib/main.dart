@@ -11,7 +11,6 @@ import 'package:lefty/SplashScreen.dart';
 import 'package:provider/provider.dart';
 
 bool isVerified = false;
-bool isLocationSelected = false;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -48,7 +47,7 @@ class AuthenticationWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
-    print(firebaseUser);
+    print("Printing fbuser: "+firebaseUser.toString());
     if (firebaseUser == null) {
       isVerified = false;
       return MyBottomNavigationBar();

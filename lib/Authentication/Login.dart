@@ -62,10 +62,7 @@ class _LoginState extends State<Login> {
                           //Email Field
 
                           TextFormField(
-                            validator: (val) =>
-                                val.isEmpty || !(val.contains('@'))
-                                    ? 'Enter a valid email address'
-                                    : null,
+                            validator: (val) => val.isEmpty || !(val.contains('@')) ? 'Enter a valid email address' : null,
                             onChanged: (value) {
                               setState(() => email = value);
                             },
@@ -79,13 +76,11 @@ class _LoginState extends State<Login> {
                               fillColor: Colors.white,
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
-                                    width: 1, color: Colors.purple[200]),
+                                borderSide: BorderSide(width: 1, color: Colors.purple[200]),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
-                                    width: 1, color: Colors.deepOrange[200]),
+                                borderSide: BorderSide(width: 1, color: Colors.deepOrange[200]),
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -101,9 +96,8 @@ class _LoginState extends State<Login> {
                           //Password Field
 
                           TextFormField(
-                            validator: (val) => val.isEmpty || val.length < 6
-                                ? 'Enter a password greater than 6 characters'
-                                : null,
+                            validator: (val) =>
+                                val.isEmpty || val.length < 6 ? 'Enter a password greater than 6 characters' : null,
                             onChanged: (value) {
                               setState(() => password = value);
                             },
@@ -117,13 +111,11 @@ class _LoginState extends State<Login> {
                               labelText: "Password",
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
-                                    width: 1, color: Colors.purple[200]),
+                                borderSide: BorderSide(width: 1, color: Colors.purple[200]),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
-                                    width: 1, color: Colors.deepOrange[200]),
+                                borderSide: BorderSide(width: 1, color: Colors.deepOrange[200]),
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -143,8 +135,7 @@ class _LoginState extends State<Login> {
                               shape: BoxShape.rectangle,
                               borderRadius: BorderRadius.circular(20),
                               child: FlatButton(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                                 onPressed: () async {
                                   print("Button presed");
                                   //
@@ -152,25 +143,22 @@ class _LoginState extends State<Login> {
                                     setState(() {
                                       loading = true;
                                     });
-                                    isSuccess = await context
-                                        .read<AuthenticationService>()
-                                        .signIn(
-                                            email: email, password: password);
+                                    isSuccess =
+                                        await context.read<AuthenticationService>().signIn(email: email, password: password);
                                     print(isSuccess);
                                     if (isSuccess.toString() == "Signed in") {
-                                      isVerified = true;
-                                      Navigator.pushReplacementNamed(
-                                          context, '/Home');
+                                      setState(() {
+                                        isVerified = true;
+                                      });
+                                      Navigator.pushReplacementNamed(context, '/Home');
                                       BotToast.showSimpleNotification(
                                         title: "Welcome back!",
                                         backgroundColor: Colors.orangeAccent,
                                       );
                                     } else {
-                                      Navigator.pushReplacementNamed(
-                                          context, '/Register');
+                                      Navigator.pushReplacementNamed(context, '/Register');
                                       BotToast.showSimpleNotification(
-                                        title:
-                                            "Failed to sign in. Please check internet connection and try again!",
+                                        title: "Failed to sign in. Please check internet connection and try again!",
                                         backgroundColor: Colors.red,
                                       );
                                     }
@@ -194,8 +182,7 @@ class _LoginState extends State<Login> {
                                 },
                                 color: Colors.deepOrange[400],
                                 child: Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                                   child: Text("Sign in"),
                                 ),
                               ),
@@ -210,8 +197,7 @@ class _LoginState extends State<Login> {
                             child: Text(
                               error,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.deepOrange[200], fontSize: 18),
+                              style: TextStyle(color: Colors.deepOrange[200], fontSize: 18),
                             ),
                           )
                         ],

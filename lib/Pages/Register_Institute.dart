@@ -29,6 +29,7 @@ class _Register_InstituteState extends State<Register_Institute> {
   File iPhoto;
   double lat;
   double long;
+  bool isLocationSelected = false;
   final picker = ImagePicker();
   Database_Services database_services = new Database_Services();
 
@@ -48,6 +49,7 @@ class _Register_InstituteState extends State<Register_Institute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Form(
@@ -319,8 +321,6 @@ class _Register_InstituteState extends State<Register_Institute> {
                           child: ElevatedButton(
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (_) => Select_Location()));
-                                setState(() {
-                                });
                               },
                               child: Text("Location Selected"),
                               style: ElevatedButton.styleFrom(
@@ -343,6 +343,7 @@ class _Register_InstituteState extends State<Register_Institute> {
                                  lat = df.latitude;
                                  long = df.longitude;
                                  setState(() {
+                                   isLocationSelected = true;
                                  });
                                }
                               },

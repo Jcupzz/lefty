@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lefty/Database_Services/Database_Services.dart';
+import 'package:lefty/static/Circular_Loading.dart';
 
 class Location extends StatefulWidget {
   @override
@@ -12,7 +15,6 @@ class Location extends StatefulWidget {
 
 class _LocationState extends State<Location> {
   GoogleMapController mapController;
-  CollectionReference collectionReference1 = FirebaseFirestore.instance.collection("iDetails");
   List<Marker> myMarker = [];
 
   void _onMapCreated(GoogleMapController controller) {
@@ -27,13 +29,20 @@ class _LocationState extends State<Location> {
 
   void _getUserLocation() async {
     var position = await GeolocatorPlatform.instance.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-
-    setState(() {
-      currentPostion = LatLng(position.latitude, position.longitude);
-    });
+    if(position!=null) {
+      setState(() {
+        currentPostion = LatLng(position.latitude, position.longitude);
+      });
+    }
+    else{
+      setState(() {
+        currentPostion = LatLng(56.53455, 65.4533434);
+      });
+    }
   }
 
   void _getAllLatLongFromFb() async {
+    CollectionReference collectionReference1 =  FirebaseFirestore.instance.collection("iDetails");
     await collectionReference1.get().then((QuerySnapshot querySnapshot) =>
         querySnapshot.docs.forEach((doc) {
           myMarker.add(Marker(markerId: MarkerId(LatLng(doc['lat'], doc['long']).toString()), position:LatLng(doc['lat'],doc['long']),infoWindow: InfoWindow(title: doc['iName'])));
@@ -42,10 +51,10 @@ class _LocationState extends State<Location> {
 
   @override
   void initState() {
+    super.initState();
     _getUserLocationPermission();
     _getUserLocation();
     _getAllLatLongFromFb();
-    super.initState();
   }
 
 //
@@ -56,10 +65,7 @@ class _LocationState extends State<Location> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Maps Sample App'),
-          backgroundColor: Colors.green[700],
-        ),
+
         body: currentPostion != null ? Stack(
           children: [
             GoogleMap(
@@ -77,7 +83,7 @@ class _LocationState extends State<Location> {
               ),
             ),
           ],
-        ) : Container(),
+        ) : Circular_Loading(),
       ),
     );
   }

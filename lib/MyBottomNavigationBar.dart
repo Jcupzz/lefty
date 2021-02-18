@@ -25,7 +25,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
-backgroundColor: Colors.white,
+        backgroundColor: Colors.white,
         animationCurve: Curves.bounceInOut,
         animationDuration: Duration(milliseconds: 200),
         color: Colors.black,

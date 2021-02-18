@@ -9,6 +9,7 @@ import 'package:lefty/Home.dart';
 import 'package:lefty/MyBottomNavigationBar.dart';
 import 'package:lefty/SplashScreen.dart';
 import 'package:provider/provider.dart';
+import 'package:theme_provider/theme_provider.dart';
 
 bool isVerified = false;
 Future<void> main() async {
@@ -20,25 +21,68 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [
-          Provider<AuthenticationService>(
-              create: (_) => AuthenticationService(FirebaseAuth.instance)),
-          StreamProvider(
-            create: (context) =>
-                context.read<AuthenticationService>().authStateChanges,
-          )
-        ],
-        child: MaterialApp(
-            builder: BotToastInit(),
-            navigatorObservers: [BotToastNavigatorObserver()],
-            home: AuthenticationWrapper(),
-            routes: {
-              '/SplashScreen': (context) => SplashScreen(),
-              '/Login': (context) => Login(),
-              '/Register': (context) => Register(),
-              '/Home': (context) => MyBottomNavigationBar(),
-            }));
+    return ThemeProvider(
+      loadThemeOnInit: true,
+      saveThemesOnChange: true,
+      defaultThemeId: 'light_theme',
+      themes: [
+        AppTheme(
+          description: "dark_theme for app",
+          id: "dark_theme", // Id(or name) of the theme(Has to be unique)
+          data: ThemeData(
+            // Real theme data
+            primaryColor: Colors.black,
+            primaryColorDark: Colors.black,
+            cardColor: Colors.grey[800],
+            backgroundColor: Colors.grey[900],
+            accentColor: Colors.grey,
+            textTheme: TextTheme(
+            ),
+            brightness: Brightness.dark,
+            splashColor: Colors.blueGrey[900],
+          ),
+        ),
+        AppTheme(
+          description: "light_theme for app",
+          id: "light_theme", // Id(or name) of the theme(Has to be unique)
+          data: ThemeData(
+            // Real theme data
+            primaryColor: Colors.green[700],
+            primaryColorDark: Colors.green[900],
+            cardColor: Colors.green[400],
+            backgroundColor: Colors.green[600],
+            accentColor: Colors.greenAccent,
+            brightness: Brightness.light,
+            splashColor: Colors.green[300],
+          ),
+        ),
+      ],
+      child: ThemeConsumer(
+
+        child: MultiProvider(
+            providers: [
+              Provider<AuthenticationService>(
+                  create: (_) => AuthenticationService(FirebaseAuth.instance)),
+              StreamProvider(
+                create: (context) =>
+                    context.read<AuthenticationService>().authStateChanges,
+              )
+            ],
+            child: Builder(
+              builder: (themeContext)=> MaterialApp(
+                  builder: BotToastInit(),
+                  theme: ThemeProvider.themeOf(themeContext).data,
+                  navigatorObservers: [BotToastNavigatorObserver()],
+                  home: AuthenticationWrapper(),
+                  routes: {
+                    '/SplashScreen': (context) => SplashScreen(),
+                    '/Login': (context) => Login(),
+                    '/Register': (context) => Register(),
+                    '/Home': (context) => MyBottomNavigationBar(),
+                  }),
+            )),
+      ),
+    );
   }
 }
 

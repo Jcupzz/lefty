@@ -6,9 +6,11 @@ import 'package:flutter/services.dart';
 import 'package:lefty/MyBottomNavigationBar.dart';
 import 'package:lefty/Pages/Details.dart';
 import 'package:lefty/main.dart';
+import 'package:lefty/static/Custom_PopUpMenu.dart';
 import 'package:lefty/static/Loading.dart';
 import 'package:provider/provider.dart';
 import 'package:lefty/Authentication/Authentication_Services.dart';
+import 'package:theme_provider/theme_provider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -16,10 +18,23 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  String theme_switcher_text = 'Dark Mode';
+
+  void themeSwitcher() {
+    if (ThemeProvider.themeOf(context).data.brightness == Brightness.light) {
+      ThemeProvider.controllerOf(context).setTheme("dark_theme");
+      theme_switcher_text = 'Light Mode';
+    } else {
+      ThemeProvider.controllerOf(context).setTheme("light_theme");
+      theme_switcher_text = 'Dark Mode';
+    }
+  }
   int selectedValue;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
+
     final firebaseUser = context.watch<User>();
     return Scaffold(
       appBar: AppBar(
@@ -45,13 +60,28 @@ class _HomeState extends State<Home> {
           //       // }
           //     }),
           PopupMenuButton(itemBuilder: (context){
-            return List.generate(1, (index) {
-              return PopupMenuItem(child: Text('SignOut'),value: 1,);
-            });
+            return [
+            PopupMenuItem(
+              value: 1,
+              child: Text('$theme_switcher_text'),
+            ),
+            PopupMenuItem(
+              value: 2,
+              child: Text('SignOut'),
+            ),
+            PopupMenuItem(
+              value: 3,
+              child: Text('About'),
+            ),
+            ];
           },
             icon: Icon(Icons.more_vert_rounded),
             onSelected: (index) async {
-              if (index == 1) {
+            switch(index){
+              case 1:
+                themeSwitcher();
+                break;
+              case 2:
                 dynamic isLoggedOut =
                 await context.read<AuthenticationService>().signOut();
                 if (isLoggedOut.toString() == "Signed out") {
@@ -61,8 +91,11 @@ class _HomeState extends State<Home> {
                   print("Signed Outt");
                   SystemNavigator.pop();
                 }
-              }
+                break;
+              case 3:
+                break;
             }
+          }
           ),
         ],
       ),

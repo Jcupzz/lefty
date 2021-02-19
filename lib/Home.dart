@@ -110,7 +110,7 @@ class _HomeState extends State<Home> {
                       padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
                       child: Card(
                           color: Theme.of(context).cardColor,
-                          elevation: 20,
+                          elevation: 0,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(14.0)),
                           child: ListTile(
@@ -136,74 +136,70 @@ class _HomeState extends State<Home> {
                                       document.data()['iType'],
                                       style:Theme.of(context).textTheme.headline4),
                                   Divider(height: 20,thickness: 0,color: Theme.of(context).dividerColor,),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Flexible(
-                                          flex: 1,
-                                          child: Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                0, 0, 10, 10),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Text(
-                                                  document.data()['iDesc'],
-                                                  softWrap: true,
-                                                  style: Theme.of(context).textTheme.bodyText1
-                                                ),
-                                                Text(
-                                                  document.data()['iAddress'],
-                                                  softWrap: true,
-                                                  style:Theme.of(context).textTheme.bodyText1
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Flexible(
-                                          flex: 1,
-                                          child: CachedNetworkImage(
-                                            imageUrl: document.data()['iPhoto'],
-                                            imageBuilder:
-                                                (context, imageProvider) =>
-                                                    Container(
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.35,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.rectangle,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                image: DecorationImage(
-                                                    image: imageProvider,
-                                                    fit: BoxFit.cover),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Flexible(
+                                        flex: 1,
+                                        child: Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 0, 10, 5),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Text(
+                                                document.data()['iDesc'],
+                                                softWrap: true,
+                                                style: Theme.of(context).textTheme.bodyText1
                                               ),
-                                            ),
-                                            placeholder: ((context, s) =>
-                                                Center(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                )),
-                                            fit: BoxFit.cover,
+                                              Text(
+                                                document.data()['iAddress'],
+                                                softWrap: true,
+                                                style:Theme.of(context).textTheme.bodyText1
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                      Flexible(
+                                        flex: 1,
+                                        child: CachedNetworkImage(
+                                          imageUrl: document.data()['iPhoto'],
+                                          imageBuilder:
+                                              (context, imageProvider) =>
+                                                  Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.35,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.rectangle,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              image: DecorationImage(
+                                                  image: imageProvider,
+                                                  fit: BoxFit.cover),
+                                            ),
+                                          ),
+                                          placeholder: ((context, s) =>
+                                              Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              )),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),

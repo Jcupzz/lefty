@@ -10,6 +10,7 @@ import 'package:lefty/Authentication/Register.dart';
 import 'package:lefty/Database_Services/Database_Services.dart';
 import 'package:lefty/Pages/Request.dart';
 import 'package:lefty/main.dart';
+import 'package:lefty/static/Circular_Loading.dart';
 import 'package:lefty/static/Loading.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
@@ -53,7 +54,7 @@ class _CreateState extends State<Create> {
             backgroundColor: Theme.of(context).backgroundColor,
             body: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,7 +98,7 @@ class _CreateState extends State<Create> {
                         stream: firestore.collection("iDetails").where('uid', isEqualTo: firebaseUser.uid).snapshots(),
                         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                           if (!snapshot.hasData) {
-                            return Loading();
+                            return Circular_Loading();
                           } else {
                             return Expanded(
                               child: ListView(
@@ -105,7 +106,7 @@ class _CreateState extends State<Create> {
                                 children: snapshot.data.docs.map((DocumentSnapshot document) {
                                   return Card(
                                       color: Theme.of(context).cardColor,
-                                      elevation: 20,
+                                      elevation: 0,
                                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
                                       child: ListTile(
                                         onTap: () {},
@@ -113,66 +114,71 @@ class _CreateState extends State<Create> {
                                           //showDeleteDialog(document);
                                         },
                                         title: Padding(
-                                          padding: const EdgeInsets.fromLTRB(0, 5, 5, 5),
+                                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 document.data()['iName'],
                                                 style: Theme.of(context).textTheme.headline3),
-                                              Padding(
-                                                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                                                child: Row(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    Flexible(
-                                                      flex: 1,
-                                                      child: Column(
-                                                        mainAxisAlignment: MainAxisAlignment.start,
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        mainAxisSize: MainAxisSize.max,
-                                                        children: [
-                                                          Text(
-                                                            document.data()['iDesc'],
-                                                            style: Theme.of(context).textTheme.bodyText1,
-                                                          ),
-                                                          Text(
-                                                            document.data()['iAddress'],
-                                                            style:  Theme.of(context).textTheme.bodyText1,
-                                                          ),
-                                                          Text(
-                                                            document.data()['iPhone1'],
-                                                            style:  Theme.of(context).textTheme.bodyText1,
-                                                          ),
-                                                          Text(
-                                                            document.data()['iPhone2'],
-                                                            style:  Theme.of(context).textTheme.bodyText1,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Flexible(
-                                                      flex: 1,
-                                                      child: CachedNetworkImage(
-                                                        imageUrl: document.data()['iPhoto'],
-                                                        imageBuilder: (context, imageProvider) => Container(
-                                                          width: 180.0,
-                                                          height: 120.0,
-                                                          decoration: BoxDecoration(
-                                                            shape: BoxShape.rectangle,
-                                                            borderRadius: BorderRadius.circular(20),
-                                                            image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
-                                                          ),
+                                              Text(
+                                                  document.data()['iType'],
+                                                  style:Theme.of(context).textTheme.headline4),
+                                              Divider(height: 20,thickness: 0,color: Theme.of(context).dividerColor,),
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Flexible(
+                                                    flex: 1,
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      mainAxisSize: MainAxisSize.max,
+                                                      children: [
+                                                        Text(
+                                                          document.data()['iDesc'],
+                                                          style: Theme.of(context).textTheme.bodyText1,
                                                         ),
-                                                        placeholder: ((context, s) => Center(
-                                                              child: CircularProgressIndicator(),
-                                                            )),
-                                                        fit: BoxFit.cover,
-                                                      ),
+                                                        Text(
+                                                          document.data()['iAddress'],
+                                                          style:  Theme.of(context).textTheme.bodyText1,
+                                                        ),
+                                                        Text(
+                                                          document.data()['iPhone1'],
+                                                          style:  Theme.of(context).textTheme.bodyText1,
+                                                        ),
+                                                        Text(
+                                                          document.data()['iPhone2'],
+                                                          style:  Theme.of(context).textTheme.bodyText1,
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                  Flexible(
+                                                    flex: 1,
+                                                    child: CachedNetworkImage(
+                                                      imageUrl: document.data()['iPhoto'],
+                                                      imageBuilder: (context, imageProvider) => Container(
+                                                        width: MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                        height: MediaQuery.of(context)
+                                                            .size
+                                                            .width * 0.35,
+                                                        decoration: BoxDecoration(
+                                                          shape: BoxShape.rectangle,
+                                                          borderRadius: BorderRadius.circular(10),
+                                                          image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+                                                        ),
+                                                      ),
+                                                      placeholder: ((context, s) => Center(
+                                                            child: CircularProgressIndicator(),
+                                                          )),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),

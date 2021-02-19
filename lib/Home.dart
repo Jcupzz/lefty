@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lefty/Pages/About.dart';
 import 'package:lefty/Pages/Details.dart';
 import 'package:lefty/Theme/ThemeController.dart';
 import 'package:lefty/main.dart';
@@ -25,6 +26,7 @@ class _HomeState extends State<Home> {
 
     final firebaseUser = context.watch<User>();
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColorDark,
         elevation: 0,
@@ -81,6 +83,7 @@ class _HomeState extends State<Home> {
                 }
                 break;
               case 3:
+                Navigator.push(context, MaterialPageRoute(builder: (_)=>About()));
                 break;
             }
           }
@@ -128,11 +131,7 @@ class _HomeState extends State<Home> {
                                 children: [
                                   Text(
                                     document.data()['iName'],
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                        letterSpacing: 1),
-                                  ),
+                                    style:Theme.of(context).textTheme.headline3),
                                   Padding(
                                     padding:
                                         const EdgeInsets.fromLTRB(0, 10, 0, 0),
@@ -156,13 +155,11 @@ class _HomeState extends State<Home> {
                                               children: [
                                                 Text(
                                                   document.data()['iDesc'],
-                                                  style: TextStyle(
-                                                      color: Colors.black),
+                                                  style: Theme.of(context).textTheme.bodyText1
                                                 ),
                                                 Text(
                                                   document.data()['iAddress'],
-                                                  style: TextStyle(
-                                                      color: Colors.black),
+                                                  style:Theme.of(context).textTheme.bodyText1
                                                 ),
                                               ],
                                             ),

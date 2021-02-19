@@ -8,6 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lefty/Database_Services/Database_Services.dart';
 import 'package:lefty/Pages/Select_Location.dart';
+import 'package:lefty/Theme/ThemeController.dart';
 import 'package:lefty/main.dart';
 import 'package:numberpicker/numberpicker.dart';
 
@@ -49,7 +50,7 @@ class _Register_InstituteState extends State<Register_Institute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).backgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Form(
@@ -63,17 +64,17 @@ class _Register_InstituteState extends State<Register_Institute> {
                 children: [
                   Text(
                     "Register Institute",
-                    style: TextStyle(color: Colors.black, fontSize: 40, fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.headline2
                   ),
                   Divider(
-                    color: Colors.black,
+                    color: Theme.of(context).dividerColor,
                     height: 30,
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Institution Name",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
                   ),
                   TextFormField(
@@ -91,15 +92,15 @@ class _Register_InstituteState extends State<Register_Institute> {
                       fillColor: Colors.white,
                       hintText: "Institution Name",
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(width: 1, color: Theme.of(context).unselectedWidgetColor),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(width: 1, color: Theme.of(context).unselectedWidgetColor),
                       ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(14),
                         borderSide: BorderSide(),
                       ),
                     ),
@@ -108,7 +109,7 @@ class _Register_InstituteState extends State<Register_Institute> {
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Institution Address",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
                   ),
                   TextFormField(
@@ -129,15 +130,15 @@ class _Register_InstituteState extends State<Register_Institute> {
                       hintText: "Institution Address",
                       fillColor: Colors.white,
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(width: 1, color: Theme.of(context).unselectedWidgetColor),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(width: 1, color: Theme.of(context).unselectedWidgetColor),
                       ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(14),
                         borderSide: BorderSide(),
                       ),
                     ),
@@ -146,11 +147,11 @@ class _Register_InstituteState extends State<Register_Institute> {
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Institution Type",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
                   ),
                   Container(
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), border: Border.all(width: 1)),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(14), border: Border.all(width: 1,color: Theme.of(context).unselectedWidgetColor),),
                     width: MediaQuery.of(context).size.width,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -192,11 +193,11 @@ class _Register_InstituteState extends State<Register_Institute> {
                   //   padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                   //   child: Text(
                   //     "Select Hours",
-                  //     style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  //     style: Theme.of(context).textTheme.bodyText2,
                   //   ),
                   // ),
                   // Container(
-                  //   decoration: BoxDecoration(border: Border.all(width: 1), borderRadius: BorderRadius.circular(20)),
+                  //   decoration: BoxDecoration(border: Border.all(width: 1), borderRadius: BorderRadius.circular(14)),
                   //   width: MediaQuery.of(context).size.width,
                   //   child: NumberPicker.horizontal(
                   //       listViewHeight: 50,
@@ -233,14 +234,14 @@ class _Register_InstituteState extends State<Register_Institute> {
                   //       ),
                   //     )),
                   Divider(
-                    color: Colors.black,
+                    color: Theme.of(context).dividerColor,
                     height: 30,
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                     child: Text(
                       "Enter Description",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
                   ),
                   TextFormField(
@@ -261,15 +262,15 @@ class _Register_InstituteState extends State<Register_Institute> {
                       hintText: "Description",
                       fillColor: Colors.white,
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(width: 1, color: Theme.of(context).unselectedWidgetColor),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(width: 1, color: Theme.of(context).unselectedWidgetColor),
                       ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(14),
                         borderSide: BorderSide(),
                       ),
                     ),
@@ -278,7 +279,7 @@ class _Register_InstituteState extends State<Register_Institute> {
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Select image of the institute (optional)",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
                   ),
                   InkWell(
@@ -286,8 +287,8 @@ class _Register_InstituteState extends State<Register_Institute> {
                     child: Container(
                       margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                       decoration: BoxDecoration(
-                        border: Border.all(width: 1),
-                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(width: 1,color: Theme.of(context).unselectedWidgetColor),
+                        borderRadius: BorderRadius.circular(14),
                       ),
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                       width: MediaQuery.of(context).size.width,
@@ -303,14 +304,14 @@ class _Register_InstituteState extends State<Register_Institute> {
                   ),
                   Divider(
                     height: 10,
-                    color: Colors.black,
+                    color: Theme.of(context).dividerColor,
                     thickness: 0,
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Select Institute Location",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
                   ),
                   isLocationSelected
@@ -324,9 +325,9 @@ class _Register_InstituteState extends State<Register_Institute> {
                               },
                               child: Text("Location Selected"),
                               style: ElevatedButton.styleFrom(
-                                  primary: Colors.green,
+                                  primary: Colors.green[300],
                                   elevation: 0,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)))),
                         )
                       : Container(
                           width: MediaQuery.of(context).size.width,
@@ -349,20 +350,20 @@ class _Register_InstituteState extends State<Register_Institute> {
                               },
                               child: Text("Select Location"),
                               style: ElevatedButton.styleFrom(
-                                  primary: Colors.black,
+                                  primary: Theme.of(context).buttonColor,
                                   elevation: 0,
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))),
                         ),
                   Divider(
                     height: 10,
-                    color: Colors.black,
+                    color: Theme.of(context).dividerColor,
                     thickness: 0,
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Primary Contact Number",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
                   ),
                   TextFormField(
@@ -380,15 +381,15 @@ class _Register_InstituteState extends State<Register_Institute> {
                     decoration: InputDecoration(
                       fillColor: Colors.white,
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(width: 1, color: Theme.of(context).unselectedWidgetColor),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(width: 1, color: Theme.of(context).unselectedWidgetColor),
                       ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(14),
                         borderSide: BorderSide(),
                       ),
                     ),
@@ -397,7 +398,7 @@ class _Register_InstituteState extends State<Register_Institute> {
                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                     child: Text(
                       "Secondary Contact Number",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
                   ),
                   TextFormField(
@@ -415,21 +416,21 @@ class _Register_InstituteState extends State<Register_Institute> {
                     decoration: InputDecoration(
                       fillColor: Colors.white,
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(width: 1, color: Theme.of(context).unselectedWidgetColor),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(width: 1, color: Colors.blueGrey[900]),
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(width: 1, color: Theme.of(context).unselectedWidgetColor),
                       ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(14),
                         borderSide: BorderSide(),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 20, 0, 30),
+                    padding: const EdgeInsets.fromLTRB(0, 14, 0, 30),
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: 50,
@@ -452,6 +453,9 @@ class _Register_InstituteState extends State<Register_Institute> {
                               case 4:
                                 iType = "Others";
                                 break;
+                                default:
+                                  iType = 'Others';
+                                  break;
                             }
                             if(lat==null&&long==null){
                               BotToast.showText(text: "Please select institute location");
@@ -463,12 +467,14 @@ class _Register_InstituteState extends State<Register_Institute> {
                             }
                           }
                         },
-                        child: Text("Done"),
-                        style: ButtonStyle(
-                          elevation: MaterialStateProperty.all(20),
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
-                          backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey[900]),
-                        ),
+                        child: Text("Done",style: Theme.of(context).textTheme.headline4,),
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          primary: Theme.of(context).buttonColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14),
+                          )
+                        )
                       ),
                     ),
                   )

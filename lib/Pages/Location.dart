@@ -65,7 +65,7 @@ class _LocationState extends State<Location> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-
+        backgroundColor: Theme.of(context).backgroundColor,
         body: currentPostion != null ? Stack(
           children: [
             GoogleMap(

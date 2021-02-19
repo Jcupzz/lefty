@@ -29,6 +29,7 @@ dependencies:
   geolocator: ^6.2.0
   get: ^3.25.4
   shared_preferences: ^0.5.12+4
+  webview_flutter: ^1.0.7
 
 dev_dependencies:
   flutter_test:

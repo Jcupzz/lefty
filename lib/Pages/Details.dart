@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:lefty/Theme/ThemeController.dart';
 
 class Details extends StatefulWidget {
   DocumentSnapshot document;
@@ -29,7 +30,7 @@ class _DetailsState extends State<Details> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Theme.of(context).backgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -43,14 +44,14 @@ class _DetailsState extends State<Details> {
                   padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
                   child: Text(
                     widget.document.data()['iName'],
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
+                    style: Theme.of(context).textTheme.headline2,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
                   child: Text(
                     widget.document.data()['iType'],
-                    style: TextStyle(fontSize: 16),
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
                 ),
                 SizedBox(
@@ -117,13 +118,10 @@ class _DetailsState extends State<Details> {
                       borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
                     title: Text('Description',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 14)),
+                        style: Theme.of(context).textTheme.bodyText2),
                     subtitle: Text(widget.document.data()['iDesc'],
                         style:
-                        TextStyle(color: Colors.black, fontSize: 18)),
+                        Theme.of(context).textTheme.bodyText1),
                   ),
                 ),
                 Card(
@@ -132,13 +130,10 @@ class _DetailsState extends State<Details> {
                       borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
                     title: Text('\nAddress',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 14)),
+                        style: Theme.of(context).textTheme.bodyText2,),
                     subtitle: Text(widget.document.data()['iAddress']+'\n',
                         style:
-                        TextStyle(color: Colors.black, fontSize: 18)),
+                        Theme.of(context).textTheme.bodyText1),
                   ),
                 ),
                 Container(
@@ -163,13 +158,10 @@ class _DetailsState extends State<Details> {
                     trailing:
                     IconButton(icon: Icon(Icons.phone), onPressed: () {}),
                     title: Text('Primary Contact',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 14)),
+                        style:  Theme.of(context).textTheme.bodyText2),
                     subtitle: Text(widget.document.data()['iPhone1'],
                         style:
-                        TextStyle(color: Colors.black, fontSize: 18)),
+                        Theme.of(context).textTheme.bodyText1),
                   ),
                 ),
                 Card(
@@ -180,13 +172,11 @@ class _DetailsState extends State<Details> {
                     trailing:
                     IconButton(icon: Icon(Icons.phone), onPressed: () {}),
                     title: Text('Secondary Contact',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 14)),
+                        style:
+                            Theme.of(context).textTheme.bodyText2),
                     subtitle: Text(widget.document.data()['iPhone2'],
                         style:
-                        TextStyle(color: Colors.black, fontSize: 18)),
+                        Theme.of(context).textTheme.bodyText1),
                   ),
                 ),
               ],

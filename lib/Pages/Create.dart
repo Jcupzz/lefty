@@ -30,7 +30,7 @@ class _CreateState extends State<Create> {
     final firebaseUser = context.watch<User>();
     return !(isVerified)
         ? AlertDialog(
-                backgroundColor: Colors.grey[100],
+                backgroundColor: Theme.of(context).backgroundColor,
                 title: Text("Sign in"),
                 content: Text("Please Sign in to register an institute"),
                 actions: [
@@ -50,10 +50,10 @@ class _CreateState extends State<Create> {
                 ],
               )
         : Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).backgroundColor,
             body: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,11 +61,11 @@ class _CreateState extends State<Create> {
                   children: [
                     Text(
                       "Create",
-                      style: TextStyle(fontSize: 50, color: Colors.black, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.headline1,
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
-                      child: Text("Register an institute here"),
+                      child: Text('Register an institute',style: Theme.of(context).textTheme.bodyText2,),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
@@ -78,8 +78,8 @@ class _CreateState extends State<Create> {
                             },
                             style: ElevatedButton.styleFrom(
                               elevation: 20,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                              primary: Colors.black,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                              primary: Theme.of(context).buttonColor,
                             ),
                             // style: ButtonStyle(
                             //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -88,7 +88,7 @@ class _CreateState extends State<Create> {
                             // ),
                             child: Text(
                               "Register Institute",
-                              style: TextStyle(color: Colors.white),
+                              style: Theme.of(context).textTheme.headline4,
                             )),
                       ),
                     ),
@@ -104,7 +104,7 @@ class _CreateState extends State<Create> {
                                 shrinkWrap: true,
                                 children: snapshot.data.docs.map((DocumentSnapshot document) {
                                   return Card(
-                                      color: Colors.white,
+                                      color: Theme.of(context).cardColor,
                                       elevation: 20,
                                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
                                       child: ListTile(
@@ -119,8 +119,7 @@ class _CreateState extends State<Create> {
                                             children: [
                                               Text(
                                                 document.data()['iName'],
-                                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, letterSpacing: 1),
-                                              ),
+                                                style: Theme.of(context).textTheme.headline3),
                                               Padding(
                                                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                                                 child: Row(
@@ -136,19 +135,19 @@ class _CreateState extends State<Create> {
                                                         children: [
                                                           Text(
                                                             document.data()['iDesc'],
-                                                            style: TextStyle(color: Colors.black),
+                                                            style: Theme.of(context).textTheme.bodyText1,
                                                           ),
                                                           Text(
                                                             document.data()['iAddress'],
-                                                            style: TextStyle(color: Colors.black),
+                                                            style:  Theme.of(context).textTheme.bodyText1,
                                                           ),
                                                           Text(
                                                             document.data()['iPhone1'],
-                                                            style: TextStyle(color: Colors.black),
+                                                            style:  Theme.of(context).textTheme.bodyText1,
                                                           ),
                                                           Text(
                                                             document.data()['iPhone2'],
-                                                            style: TextStyle(color: Colors.black),
+                                                            style:  Theme.of(context).textTheme.bodyText1,
                                                           ),
                                                         ],
                                                       ),
@@ -190,13 +189,12 @@ class _CreateState extends State<Create> {
                                                           },
                                                           child: Text(
                                                             "Cancel Request",
-                                                            style: TextStyle(color: Colors.white),
-                                                          ),
+                                                            style: Theme.of(context).textTheme.headline4),
                                                           style: ElevatedButton.styleFrom(
-                                                            primary: Colors.red,
-                                                            elevation: 10,
+                                                            primary: Colors.red[300],
+                                                            elevation: 0,
                                                             shape: RoundedRectangleBorder(
-                                                              borderRadius: BorderRadius.circular(20),
+                                                              borderRadius: BorderRadius.circular(14),
                                                             ),
                                                           ),
                                                         )
@@ -210,13 +208,13 @@ class _CreateState extends State<Create> {
                                                           },
                                                           child: Text(
                                                             "Create Request",
-                                                            style: TextStyle(color: Colors.white),
+                                                            style: Theme.of(context).textTheme.headline4,
                                                           ),
                                                           style: ElevatedButton.styleFrom(
-                                                            primary: Colors.black,
-                                                            elevation: 10,
+                                                            primary: Theme.of(context).buttonColor,
+                                                            elevation: 0,
                                                             shape: RoundedRectangleBorder(
-                                                              borderRadius: BorderRadius.circular(20),
+                                                              borderRadius: BorderRadius.circular(14),
                                                             ),
                                                           ),
                                                         ),

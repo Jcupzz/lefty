@@ -36,6 +36,10 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
           builder: BotToastInit(),
           theme: ThemeData.light().copyWith(
+            snackBarTheme: SnackBarThemeData(
+              backgroundColor: Colors.black,
+              actionTextColor: Colors.black,
+            ),
               accentColorBrightness: Brightness.light,
               primaryColor: Color(0xff00766c),
               primaryColorDark: Color(0xFF005b4f),
@@ -60,7 +64,15 @@ class MyApp extends StatelessWidget {
                   headline4: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
                   bodyText2: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
                   headline1: TextStyle(color: Colors.black, fontSize: 60, fontWeight: FontWeight.bold))),
+         //
+         //
+         //DarkTheme
+         //
           darkTheme: ThemeData.dark().copyWith(
+              snackBarTheme: SnackBarThemeData(
+                backgroundColor: Colors.grey[850],
+                actionTextColor: Colors.white,
+              ),
               textTheme: TextTheme(
                   bodyText1: TextStyle(
                     color: Colors.white,

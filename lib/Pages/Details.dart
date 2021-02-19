@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lefty/Theme/ThemeController.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Details extends StatefulWidget {
   DocumentSnapshot document;
@@ -156,7 +157,9 @@ class _DetailsState extends State<Details> {
                       borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
                     trailing:
-                    IconButton(icon: Icon(Icons.phone), onPressed: () {}),
+                    IconButton(splashColor: Theme.of(context).splashColor,icon: Icon(Icons.phone), onPressed: () {
+                      _launchURL('tel:${widget.document.data()['iPhone1']}');
+                    }),
                     title: Text('Primary Contact',
                         style:  Theme.of(context).textTheme.bodyText2),
                     subtitle: Text(widget.document.data()['iPhone1'],
@@ -170,7 +173,9 @@ class _DetailsState extends State<Details> {
                       borderRadius: BorderRadius.circular(14)),
                   child: ListTile(
                     trailing:
-                    IconButton(icon: Icon(Icons.phone), onPressed: () {}),
+                    IconButton(splashColor: Theme.of(context).splashColor,icon: Icon(Icons.phone), onPressed: () {
+                      _launchURL('tel:${widget.document.data()['iPhone2']}');
+                    }),
                     title: Text('Secondary Contact',
                         style:
                             Theme.of(context).textTheme.bodyText2),
@@ -185,5 +190,12 @@ class _DetailsState extends State<Details> {
         ),
       ),
     );
+  }
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

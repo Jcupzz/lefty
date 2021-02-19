@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lefty/Database_Services/Database_Services.dart';
+import 'package:lefty/MyBottomNavigationBar.dart';
 import 'package:lefty/Pages/Create.dart';
 import 'package:lefty/Pages/Select_Location.dart';
 import 'package:lefty/Theme/ThemeController.dart';
@@ -462,10 +463,10 @@ class _Register_InstituteState extends State<Register_Institute> {
                               BotToast.showText(text: "Please select institute location");
                             }
                             else{
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Processing Data')));
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Processing Data',style: Theme.of(context).textTheme.headline4,)));
                               database_services.addCreateToFb(
                                   iName, iAddress, iType, iPhoto, iPhone1, iPhone2, iDesc, false, lat, long);
-                              Navigator.push(context, MaterialPageRoute(builder: (_)=>Create()));
+                              Navigator.push(context, MaterialPageRoute(builder: (_)=>MyBottomNavigationBar()));
                             }
                           }
                         },

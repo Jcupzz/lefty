@@ -94,7 +94,7 @@ class MyApp extends StatelessWidget {
               backgroundColor: Colors.grey[900],
               accentColor: Colors.teal[100],
               brightness: Brightness.dark,
-              splashColor: Colors.blueGrey[900],
+              splashColor: Colors.greenAccent,
               buttonColor: Colors.grey[700],
               accentColorBrightness: Brightness.dark),
           themeMode: ThemeController.to.themeMode,

@@ -14,7 +14,7 @@ class MyBottomNavigationBar extends StatefulWidget {
 
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   int _page = 0;
-  final _pageOption = [
+  final pageOption = [
     Home(),
     Create(),
     Location(),
@@ -59,7 +59,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
           });
         },
       ),
-      body: _pageOption[_page],
+      body: pageOption[_page],
     );
   }
 }

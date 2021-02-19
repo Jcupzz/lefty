@@ -69,7 +69,7 @@ class _LocationState extends State<Location> {
         body: currentPostion != null ? Stack(
           children: [
             GoogleMap(
-              mapToolbarEnabled: false,
+              mapToolbarEnabled: true,
               buildingsEnabled: true,
               mapType: MapType.hybrid,
               tiltGesturesEnabled: true,

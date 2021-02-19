@@ -132,6 +132,10 @@ class _HomeState extends State<Home> {
                                   Text(
                                     document.data()['iName'],
                                     style:Theme.of(context).textTheme.headline3),
+                                  Text(
+                                      document.data()['iType'],
+                                      style:Theme.of(context).textTheme.headline4),
+                                  Divider(height: 20,thickness: 0,color: Theme.of(context).dividerColor,),
                                   Padding(
                                     padding:
                                         const EdgeInsets.fromLTRB(0, 10, 0, 0),
@@ -145,7 +149,7 @@ class _HomeState extends State<Home> {
                                           flex: 1,
                                           child: Padding(
                                             padding: const EdgeInsets.fromLTRB(
-                                                5, 10, 5, 10),
+                                                0, 0, 10, 10),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
@@ -155,10 +159,12 @@ class _HomeState extends State<Home> {
                                               children: [
                                                 Text(
                                                   document.data()['iDesc'],
+                                                  softWrap: true,
                                                   style: Theme.of(context).textTheme.bodyText1
                                                 ),
                                                 Text(
                                                   document.data()['iAddress'],
+                                                  softWrap: true,
                                                   style:Theme.of(context).textTheme.bodyText1
                                                 ),
                                               ],
@@ -182,7 +188,7 @@ class _HomeState extends State<Home> {
                                               decoration: BoxDecoration(
                                                 shape: BoxShape.rectangle,
                                                 borderRadius:
-                                                    BorderRadius.circular(20),
+                                                    BorderRadius.circular(10),
                                                 image: DecorationImage(
                                                     image: imageProvider,
                                                     fit: BoxFit.cover),

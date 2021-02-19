@@ -27,8 +27,8 @@ dependencies:
   json_serializable: ^3.3.0
   location: ^3.2.4
   geolocator: ^6.2.0
-  flutter_phoenix: ^0.1.0
-  theme_provider: ^0.4.0+1
+  get: ^3.25.4
+  shared_preferences: ^0.5.12+4
 
 dev_dependencies:
   flutter_test:

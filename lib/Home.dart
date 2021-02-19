@@ -3,14 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lefty/MyBottomNavigationBar.dart';
 import 'package:lefty/Pages/Details.dart';
+import 'package:lefty/Theme/ThemeController.dart';
 import 'package:lefty/main.dart';
-import 'package:lefty/static/Custom_PopUpMenu.dart';
 import 'package:lefty/static/Loading.dart';
 import 'package:provider/provider.dart';
 import 'package:lefty/Authentication/Authentication_Services.dart';
-import 'package:theme_provider/theme_provider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -18,17 +16,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String theme_switcher_text = 'Dark Mode';
-
-  void themeSwitcher() {
-    if (ThemeProvider.themeOf(context).data.brightness == Brightness.light) {
-      ThemeProvider.controllerOf(context).setTheme("dark_theme");
-      theme_switcher_text = 'Light Mode';
-    } else {
-      ThemeProvider.controllerOf(context).setTheme("light_theme");
-      theme_switcher_text = 'Dark Mode';
-    }
-  }
+  ThemeMode _themeMode;
   int selectedValue;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -38,7 +26,7 @@ class _HomeState extends State<Home> {
     final firebaseUser = context.watch<User>();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).primaryColorDark,
         elevation: 0,
         title: Text(
           "Lefty.",
@@ -63,7 +51,7 @@ class _HomeState extends State<Home> {
             return [
             PopupMenuItem(
               value: 1,
-              child: Text('$theme_switcher_text'),
+              child: Text('Theme'),
             ),
             PopupMenuItem(
               value: 2,
@@ -79,7 +67,7 @@ class _HomeState extends State<Home> {
             onSelected: (index) async {
             switch(index){
               case 1:
-                themeSwitcher();
+                changeThemeShowDialog(context);
                 break;
               case 2:
                 dynamic isLoggedOut =
@@ -118,7 +106,7 @@ class _HomeState extends State<Home> {
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
                       child: Card(
-                          color: Colors.white,
+                          color: Theme.of(context).cardColor,
                           elevation: 20,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(14.0)),
@@ -224,6 +212,59 @@ class _HomeState extends State<Home> {
               }
             }),
       ),
+    );
+  }
+  changeThemeShowDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+            title: Text("Theme"),
+            content: themeDialog(),
+          );
+        });
+  }
+
+  Widget themeDialog() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        RadioListTile(
+          title: Text('system'),
+          value: ThemeMode.system,
+          groupValue: _themeMode,
+          onChanged: (value) {
+            setState(() {
+              _themeMode = value;
+              ThemeController.to.setThemeMode(_themeMode);
+            });
+          },
+        ),
+        RadioListTile(
+          title: Text('dark'),
+          value: ThemeMode.dark,
+          groupValue: _themeMode,
+          onChanged: (value) {
+            setState(() {
+              _themeMode = value;
+              ThemeController.to.setThemeMode(_themeMode);
+            });
+          },
+        ),
+        RadioListTile(
+          title: Text('light'),
+          value: ThemeMode.light,
+          groupValue: _themeMode,
+          onChanged: (value) {
+            setState(() {
+              _themeMode = value;
+              ThemeController.to.setThemeMode(_themeMode);
+            });
+          },
+        )
+      ],
     );
   }
 }

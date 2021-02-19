@@ -335,13 +335,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.8.1"
-  flutter_phoenix:
-    dependency: "direct main"
-    description:
-      name: flutter_phoenix
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -387,6 +380,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  get:
+    dependency: "direct main"
+    description:
+      name: get
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.25.4"
   glob:
     dependency: transitive
     description:
@@ -710,7 +710,7 @@ packages:
     source: hosted
     version: "0.25.0"
   shared_preferences:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: shared_preferences
       url: "https://pub.dartlang.org"
@@ -854,13 +854,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.19"
-  theme_provider:
-    dependency: "direct main"
-    description:
-      name: theme_provider
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.0+1"
   timing:
     dependency: transitive
     description:

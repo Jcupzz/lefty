@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -28,7 +29,6 @@ class _LocationState extends State<Location> {
   }
 
 //
-
   LatLng currentPostion;
 
   void _getUserLocation() async {
@@ -94,13 +94,13 @@ class _LocationState extends State<Location> {
                     ),
                   ),
                   (showDetailsButton)?Positioned(
-                      top: 10,
+                      bottom: 18,
                       left: 0,
                       child:
                       Container(
 
-                        height: 40,
-                        width: MediaQuery.of(context).size.width * 0.85,
+                        height: 38,
+                        width: MediaQuery.of(context).size.width * 0.6,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(20,0,20,0),
                           child: ElevatedButton(
@@ -110,8 +110,8 @@ class _LocationState extends State<Location> {
                                 Navigator.push(context, MaterialPageRoute(builder: (_)=>Details(documentSnapshot)));
                               }
                             },
-                            child: Text("Show Details",style: TextStyle(color: Colors.white),),
-                            style: ElevatedButton.styleFrom(primary: Colors.blue,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                            child: Text("Show Details",style: TextStyle(color: Colors.black),),
+                            style: ElevatedButton.styleFrom(primary: Colors.white70,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
                           ),
                         ),
                       )
@@ -152,3 +152,5 @@ class _LocationState extends State<Location> {
     }
   }
 }
+
+

@@ -39,7 +39,7 @@ class _LoginState extends State<Login> {
                             child: Text(
                               "Hi there",
                               style: TextStyle(
-                                  color: ThemeController.to.themeMode == ThemeMode.light ? Colors.black : Colors.teal[50],
+                                  color: ThemeController.to.themeMode == ThemeMode.light ? Colors.teal[600] : Colors.teal[50],
                                   fontSize: 65,
                                   fontFamily: 'Lobster',
                                   fontWeight: FontWeight.bold),
@@ -50,7 +50,7 @@ class _LoginState extends State<Login> {
                             child: Text(
                               "Welcome back",
                               style: TextStyle(
-                                  color: ThemeController.to.themeMode == ThemeMode.light ? Colors.black : Colors.teal[100],
+                                  color: ThemeController.to.themeMode == ThemeMode.light ? Colors.teal[700] : Colors.teal[100],
                                   fontSize: 35,
                                   fontFamily: 'Lobster',
                                   fontStyle: FontStyle.normal,
@@ -68,9 +68,9 @@ class _LoginState extends State<Login> {
                             onChanged: (value) {
                               setState(() => email = value);
                             },
-                            style: Theme.of(context).textTheme.headline4,
+                            style: Theme.of(context).textTheme.headline5,
                             decoration: InputDecoration(
-                              labelStyle: Theme.of(context).textTheme.headline4,
+                              labelStyle: Theme.of(context).textTheme.headline5,
                               labelText: "Email",
                               fillColor: Colors.white,
                               focusedBorder: OutlineInputBorder(
@@ -101,9 +101,9 @@ class _LoginState extends State<Login> {
                               setState(() => password = value);
                             },
                             obscureText: true,
-                            style: TextStyle(color: Colors.purple[200]),
+                            style: Theme.of(context).textTheme.headline5,
                             decoration: InputDecoration(
-                              labelStyle: Theme.of(context).textTheme.headline4,
+                              labelStyle: Theme.of(context).textTheme.headline5,
                               labelText: "Password",
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -124,67 +124,62 @@ class _LoginState extends State<Login> {
                           ),
                           Container(
                             width: double.infinity,
-                            child: PhysicalModel(
-                              color: Colors.transparent,
-                              shadowColor: Colors.black,
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.circular(20),
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Theme.of(context).buttonColor,
-                                  elevation: 20,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                                ),
-                                onPressed: () async {
-                                  print("Button presed");
-                                  //
-                                  if (_formkey.currentState.validate()) {
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Theme.of(context).buttonColor,
+                                elevation: 10,
+                                shadowColor: ThemeController.to.themeMode == ThemeMode.light?Colors.teal[500]:Colors.black,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                              ),
+                              onPressed: () async {
+                                print("Button presed");
+                                //
+                                if (_formkey.currentState.validate()) {
+                                  setState(() {
+                                    loading = true;
+                                  });
+                                  isSuccess =
+                                      await context.read<AuthenticationService>().signIn(email: email, password: password);
+                                  print(isSuccess);
+                                  if (isSuccess.toString() == "Signed in") {
                                     setState(() {
-                                      loading = true;
+                                      isVerified = true;
                                     });
-                                    isSuccess =
-                                        await context.read<AuthenticationService>().signIn(email: email, password: password);
-                                    print(isSuccess);
-                                    if (isSuccess.toString() == "Signed in") {
-                                      setState(() {
-                                        isVerified = true;
-                                      });
-                                      Navigator.pushReplacementNamed(context, '/Home');
-                                      BotToast.showSimpleNotification(
-                                        title: "Welcome back!",
-                                        backgroundColor: Colors.teal[100],
-                                      );
-                                    } else {
-                                      Navigator.pushReplacementNamed(context, '/Register');
-                                      BotToast.showSimpleNotification(
-                                        title: "Failed to sign in. Please check internet connection and try again!",
-                                        backgroundColor: Colors.red[300],
-                                      );
-                                    }
+                                    Navigator.pushReplacementNamed(context, '/Home');
+                                    BotToast.showSimpleNotification(
+                                      title: "Welcome back!",
+                                      backgroundColor: Colors.teal[100],
+                                    );
+                                  } else {
+                                    Navigator.pushReplacementNamed(context, '/Register');
+                                    BotToast.showSimpleNotification(
+                                      title: "Failed to sign in. Please check internet connection and try again!",
+                                      backgroundColor: Colors.red[300],
+                                    );
                                   }
-                                  //}
-                                  //   dynamic result =
-                                  //   await _auth.loginWithEmailAndPassword(
-                                  //       email, password);
-                                  //   if (result == null) {
-                                  //     setState(() {
-                                  //       loading = false;
-                                  //       error = 'Invalid Credentials';
-                                  //       print(
-                                  //           "Oops...!\nSign in failed!\nInvalid Credentials");
-                                  //     });
-                                  //   } else {
-                                  //     print('User Signed In Successfully');
-                                  //     Navigator.pushNamed(context, '/List_home');
-                                  //   }
-                                  // }
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                                  child: Text(
-                                    "Sign in",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
+                                }
+                                //}
+                                //   dynamic result =
+                                //   await _auth.loginWithEmailAndPassword(
+                                //       email, password);
+                                //   if (result == null) {
+                                //     setState(() {
+                                //       loading = false;
+                                //       error = 'Invalid Credentials';
+                                //       print(
+                                //           "Oops...!\nSign in failed!\nInvalid Credentials");
+                                //     });
+                                //   } else {
+                                //     print('User Signed In Successfully');
+                                //     Navigator.pushNamed(context, '/List_home');
+                                //   }
+                                // }
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                child: Text(
+                                  "Sign in",
+                                  style: TextStyle(color: Colors.white),
                                 ),
                               ),
                             ),

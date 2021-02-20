@@ -92,6 +92,7 @@ class _HomeState extends State<Home> {
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
+        margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
         height: MediaQuery.of(context).size.height,
         child: StreamBuilder<QuerySnapshot>(
             stream: firestore
@@ -134,7 +135,7 @@ class _HomeState extends State<Home> {
                                     style:Theme.of(context).textTheme.headline3),
                                   Text(
                                       document.data()['iType'],
-                                      style:Theme.of(context).textTheme.headline4),
+                                      style:Theme.of(context).textTheme.headline5),
                                   Divider(height: 20,thickness: 0,color: Theme.of(context).dividerColor,),
                                   Row(
                                     crossAxisAlignment:

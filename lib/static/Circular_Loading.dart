@@ -7,10 +7,10 @@ class Circular_Loading extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData themeData;
     return Container(
-        color: ThemeController.to.themeMode == ThemeMode.light?Colors.white:Colors.grey[900],
+        color: ThemeController.to.themeMode == ThemeMode.light?Colors.teal[100]:Colors.grey[900],
         child: Center(
           child: SpinKitChasingDots(
-            color: ThemeController.to.themeMode == ThemeMode.light?Colors.black:Colors.white,
+            color: ThemeController.to.themeMode == ThemeMode.light?Colors.teal[700]:Colors.white,
             size: 100.0,
           ),
         ));

@@ -7,10 +7,10 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: ThemeController.to.themeMode == ThemeMode.light?Colors.white:Colors.black,
+        color: ThemeController.to.themeMode == ThemeMode.light?Colors.teal[100]:Colors.black,
         child: Center(
           child: SpinKitRipple(
-            color: ThemeController.to.themeMode == ThemeMode.light?Colors.black:Colors.white,
+            color: ThemeController.to.themeMode == ThemeMode.light?Colors.teal[700]:Colors.white,
             size: 80.0,
           ),
         ));

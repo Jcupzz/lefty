@@ -38,7 +38,7 @@ class _CreateState extends State<Create> {
               elevation: 30,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               backgroundColor: Theme.of(context).cardColor,
-              title: Text("Sign in"),
+              title: Text("Sign in",style: Theme.of(context).textTheme.headline3,),
               content: Text("Please Sign in to register an institute"),
               actions: [
                 Container(
@@ -131,7 +131,7 @@ class _CreateState extends State<Create> {
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(document.data()['iName'], style: Theme.of(context).textTheme.headline3),
-                                              Text(document.data()['iType'], style: Theme.of(context).textTheme.headline4),
+                                              Text(document.data()['iType'], style: Theme.of(context).textTheme.headline5),
                                               Divider(
                                                 height: 20,
                                                 thickness: 0,

@@ -38,7 +38,7 @@ class _RegisterState extends State<Register> {
                             child: Text(
                               "Welcome to",
                               style: TextStyle(
-                                color: ThemeController.to.themeMode == ThemeMode.light ? Colors.black : Colors.teal[50],
+                                color: ThemeController.to.themeMode == ThemeMode.light ? Colors.teal[600] : Colors.teal[50],
                                 fontSize: 45,
                                 fontFamily: 'Lobster'
                               ),
@@ -49,7 +49,7 @@ class _RegisterState extends State<Register> {
                             child: Text(
                               "Lefty.",
                               style: TextStyle(
-                                  color: ThemeController.to.themeMode == ThemeMode.light ? Colors.black : Colors.teal[100],
+                                  color: ThemeController.to.themeMode == ThemeMode.light ? Colors.teal[700] : Colors.teal[100],
                                   fontSize: 100,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Lobster'),
@@ -63,12 +63,12 @@ class _RegisterState extends State<Register> {
 
                           TextFormField(
                             validator: (val) => val.isEmpty || !(val.contains('@')) ? 'Enter a valid email address' : null,
-                            style: Theme.of(context).textTheme.headline4,
+                            style: Theme.of(context).textTheme.headline5,
                             onChanged: (value) {
                               setState(() => email = value);
                             },
                             decoration: InputDecoration(
-                              labelStyle: Theme.of(context).textTheme.headline4,
+                              labelStyle: Theme.of(context).textTheme.headline5,
                               labelText: "Email",
                               fillColor: Colors.white,
                               focusedBorder: OutlineInputBorder(
@@ -99,9 +99,9 @@ class _RegisterState extends State<Register> {
                               setState(() => password = value);
                             },
                             obscureText: true,
-                            style: Theme.of(context).textTheme.headline4,
+                            style: Theme.of(context).textTheme.headline5,
                             decoration: InputDecoration(
-                              labelStyle: Theme.of(context).textTheme.headline4,
+                              labelStyle: Theme.of(context).textTheme.headline5,
                               labelText: "Password",
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -122,66 +122,60 @@ class _RegisterState extends State<Register> {
                           ),
                           Container(
                             width: double.infinity,
-                            child: PhysicalModel(
-                              color: Colors.transparent,
-                              shadowColor: Colors.black,
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.circular(20),
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  shadowColor: Colors.black,
-                                  elevation: 20,
-                                  primary: Theme.of(context).buttonColor,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                                ),
-                                onPressed: () async {
-                                  if (_formkey.currentState.validate()) {
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                shadowColor: ThemeController.to.themeMode == ThemeMode.light?Colors.teal[500]:Colors.black,
+                                elevation: 10,
+                                primary: Theme.of(context).buttonColor,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                              ),
+                              onPressed: () async {
+                                if (_formkey.currentState.validate()) {
+                                  setState(() {
+                                    loading = true;
+                                  });
+                                  dynamic isSuccess =
+                                      await context.read<AuthenticationService>().signUp(email: email, password: password);
+                                  if (isSuccess.toString() == "Signed up") {
                                     setState(() {
-                                      loading = true;
+                                      isVerified = true;
                                     });
-                                    dynamic isSuccess =
-                                        await context.read<AuthenticationService>().signUp(email: email, password: password);
-                                    if (isSuccess.toString() == "Signed up") {
-                                      setState(() {
-                                        isVerified = true;
-                                      });
-                                      Navigator.pushReplacementNamed(context, '/Home');
-                                      BotToast.showSimpleNotification(
-                                        title: " Welcome! ",
-                                        backgroundColor: Colors.teal[200],
-                                      );
-                                    } else {
-                                      Navigator.pushReplacementNamed(context, '/Register');
-                                      BotToast.showSimpleNotification(
-                                        title: "Failed to register. Please check internet connection and try again!",
-                                        backgroundColor: Colors.red[300],
-                                      );
-                                    }
+                                    Navigator.pushReplacementNamed(context, '/Home');
+                                    BotToast.showSimpleNotification(
+                                      title: " Welcome! ",
+                                      backgroundColor: Colors.teal[200],
+                                    );
+                                  } else {
+                                    Navigator.pushReplacementNamed(context, '/Register');
+                                    BotToast.showSimpleNotification(
+                                      title: "Failed to register. Please check internet connection and try again!",
+                                      backgroundColor: Colors.red[300],
+                                    );
                                   }
-                                  // if (_formkey.currentState.validate()) {
-                                  //   setState(() {
-                                  //     loading = true;
-                                  //   });
-                                  //   dynamic result =
-                                  //   await _auth.registerWithEmailAndPassword(
-                                  //       email, password);
-                                  //   if (result == null) {
-                                  //     setState(() {
-                                  //       print("Error user not registered");
-                                  //       loading = false;
-                                  //     });
-                                  //   } else {
-                                  //     print('User Signed In Successfully');
-                                  //     Navigator.pushReplacementNamed(
-                                  //         context, '/List_home');
-                                  //  }
-                                  // }
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                                  child: Text(
-                                    "Sign up",
-                                  ),
+                                }
+                                // if (_formkey.currentState.validate()) {
+                                //   setState(() {
+                                //     loading = true;
+                                //   });
+                                //   dynamic result =
+                                //   await _auth.registerWithEmailAndPassword(
+                                //       email, password);
+                                //   if (result == null) {
+                                //     setState(() {
+                                //       print("Error user not registered");
+                                //       loading = false;
+                                //     });
+                                //   } else {
+                                //     print('User Signed In Successfully');
+                                //     Navigator.pushReplacementNamed(
+                                //         context, '/List_home');
+                                //  }
+                                // }
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                child: Text(
+                                  "Sign up",
                                 ),
                               ),
                             ),
@@ -192,8 +186,8 @@ class _RegisterState extends State<Register> {
                               },
                               child: Text(
                                 "Already registered ? Login Here",
-                                style: Theme.of(context).textTheme.headline4.apply(
-                                      fontFamily: '',
+                                style: Theme.of(context).textTheme.headline5.apply(
+                                      fontFamily: '',color: ThemeController.to.themeMode == ThemeMode.light?Colors.teal[700]:Colors.grey
                                     ),
                               )),
                         ],

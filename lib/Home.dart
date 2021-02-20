@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
         elevation: 0,
         title: Text(
           "Lefty.",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.teal[100],fontFamily: 'Lobster',fontSize: 30),
         ),
         centerTitle: true,
         actions: [

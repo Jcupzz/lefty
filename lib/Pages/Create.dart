@@ -11,6 +11,7 @@ import 'package:lefty/Database_Services/Database_Services.dart';
 import 'package:lefty/Pages/Request.dart';
 import 'package:lefty/main.dart';
 import 'package:lefty/static/Circular_Loading.dart';
+import 'package:lefty/static/Horizontal_Loading.dart';
 import 'package:lefty/static/Loading.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
@@ -25,31 +26,40 @@ class Create extends StatefulWidget {
 class _CreateState extends State<Create> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   String timer;
+  Database_Services database_services = new Database_Services();
 
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
     return !(isVerified)
-        ? AlertDialog(
-                backgroundColor: Theme.of(context).backgroundColor,
-                title: Text("Sign in"),
-                content: Text("Please Sign in to register an institute"),
-                actions: [
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: ElevatedButton(
+        ? Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
+          body: AlertDialog(
+              elevation: 30,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              backgroundColor: Theme.of(context).cardColor,
+              title: Text("Sign in"),
+              content: Text("Please Sign in to register an institute"),
+              actions: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  width: MediaQuery.of(context).size.width,
+                  child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14)
-                        )
-                      ),
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (_) => Register()));
-                        },
-                        child: Text("Ok")),
-                  )
-                ],
-              )
+                          elevation: 0,
+                          primary: Theme.of(context).buttonColor,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => Register()));
+                      },
+                      child: Text(
+                        "Ok",
+                        style: Theme.of(context).textTheme.headline4,
+                      )),
+                )
+              ],
+            ),
+        )
         : Scaffold(
             backgroundColor: Theme.of(context).backgroundColor,
             body: SafeArea(
@@ -66,10 +76,13 @@ class _CreateState extends State<Create> {
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
-                      child: Text('Register an institute',style: Theme.of(context).textTheme.bodyText2,),
+                      child: Text(
+                        'Register an institute',
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                      padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         height: 50,
@@ -78,7 +91,7 @@ class _CreateState extends State<Create> {
                               Navigator.push(context, MaterialPageRoute(builder: (_) => Register_Institute()));
                             },
                             style: ElevatedButton.styleFrom(
-                              elevation: 20,
+                              elevation: 30,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                               primary: Theme.of(context).buttonColor,
                             ),
@@ -94,11 +107,10 @@ class _CreateState extends State<Create> {
                       ),
                     ),
                     StreamBuilder<QuerySnapshot>(
-
                         stream: firestore.collection("iDetails").where('uid', isEqualTo: firebaseUser.uid).snapshots(),
                         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                           if (!snapshot.hasData) {
-                            return Circular_Loading();
+                            return Horizontal_Loading();
                           } else {
                             return Expanded(
                               child: ListView(
@@ -111,48 +123,51 @@ class _CreateState extends State<Create> {
                                       child: ListTile(
                                         onTap: () {},
                                         onLongPress: () {
-                                          //showDeleteDialog(document);
+                                          showDeleteDialog(document);
                                         },
                                         title: Padding(
                                           padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                document.data()['iName'],
-                                                style: Theme.of(context).textTheme.headline3),
-                                              Text(
-                                                  document.data()['iType'],
-                                                  style:Theme.of(context).textTheme.headline4),
-                                              Divider(height: 20,thickness: 0,color: Theme.of(context).dividerColor,),
+                                              Text(document.data()['iName'], style: Theme.of(context).textTheme.headline3),
+                                              Text(document.data()['iType'], style: Theme.of(context).textTheme.headline4),
+                                              Divider(
+                                                height: 20,
+                                                thickness: 0,
+                                                color: Theme.of(context).dividerColor,
+                                              ),
                                               Row(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
                                                   Flexible(
                                                     flex: 1,
-                                                    child: Column(
-                                                      mainAxisAlignment: MainAxisAlignment.start,
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      mainAxisSize: MainAxisSize.max,
-                                                      children: [
-                                                        Text(
-                                                          document.data()['iDesc'],
-                                                          style: Theme.of(context).textTheme.bodyText1,
-                                                        ),
-                                                        Text(
-                                                          document.data()['iAddress'],
-                                                          style:  Theme.of(context).textTheme.bodyText1,
-                                                        ),
-                                                        Text(
-                                                          document.data()['iPhone1'],
-                                                          style:  Theme.of(context).textTheme.bodyText1,
-                                                        ),
-                                                        Text(
-                                                          document.data()['iPhone2'],
-                                                          style:  Theme.of(context).textTheme.bodyText1,
-                                                        ),
-                                                      ],
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.fromLTRB(0,0,15,3),
+                                                      child: Column(
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        mainAxisSize: MainAxisSize.max,
+                                                        children: [
+                                                          Text(
+                                                            document.data()['iDesc'],
+                                                            style: Theme.of(context).textTheme.bodyText1,
+                                                          ),
+                                                          Text(
+                                                            document.data()['iAddress'],
+                                                            style: Theme.of(context).textTheme.bodyText1,
+                                                          ),
+                                                          Text(
+                                                            document.data()['iPhone1'],
+                                                            style: Theme.of(context).textTheme.bodyText1,
+                                                          ),
+                                                          Text(
+                                                            document.data()['iPhone2'],
+                                                            style: Theme.of(context).textTheme.bodyText1,
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                   Flexible(
@@ -160,12 +175,8 @@ class _CreateState extends State<Create> {
                                                     child: CachedNetworkImage(
                                                       imageUrl: document.data()['iPhoto'],
                                                       imageBuilder: (context, imageProvider) => Container(
-                                                        width: MediaQuery.of(context)
-                                                            .size
-                                                            .width,
-                                                        height: MediaQuery.of(context)
-                                                            .size
-                                                            .width * 0.35,
+                                                        width: MediaQuery.of(context).size.width,
+                                                        height: MediaQuery.of(context).size.width * 0.35,
                                                         decoration: BoxDecoration(
                                                           shape: BoxShape.rectangle,
                                                           borderRadius: BorderRadius.circular(10),
@@ -193,9 +204,8 @@ class _CreateState extends State<Create> {
                                                                 .update({'isRequested': false});
                                                             //showRequestDialog(document, firebaseUser);
                                                           },
-                                                          child: Text(
-                                                            "Cancel Request",
-                                                            style: Theme.of(context).textTheme.headline4),
+                                                          child: Text("Cancel Request",
+                                                              style: Theme.of(context).textTheme.headline4),
                                                           style: ElevatedButton.styleFrom(
                                                             primary: Colors.red[300],
                                                             elevation: 0,
@@ -240,6 +250,50 @@ class _CreateState extends State<Create> {
               ),
             ),
           );
+  }
+  void showDeleteDialog(DocumentSnapshot doc) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            elevation: 24,
+            backgroundColor: Theme.of(context).cardColor,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            title: Text("Delete",style: Theme.of(context).textTheme.headline3),
+            content: Text("Do you want to delete?",style: Theme.of(context).textTheme.subtitle1),
+            actions: <Widget>[
+              ElevatedButton(
+
+                style: ElevatedButton.styleFrom(
+                  primary: Theme.of(context).cardColor,
+                  elevation: 0
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  "No",
+                  style: TextStyle(color: Colors.greenAccent,fontSize: 18),
+                ),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: Theme.of(context).cardColor,
+                  elevation: 0
+                ),
+                onPressed: () {
+                  database_services.deleteDataFromFb(doc,context);
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  "Yes",
+                  style: TextStyle(fontSize: 18 ,color: Colors.redAccent),
+                ),
+              ),
+            ],
+          );
+        });
   }
 
 // void showRequestDialog(DocumentSnapshot document, User firebaseUser) {

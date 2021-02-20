@@ -36,17 +36,20 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
           builder: BotToastInit(),
           theme: ThemeData.light().copyWith(
-            snackBarTheme: SnackBarThemeData(
-              backgroundColor: Colors.black,
-              actionTextColor: Colors.black,
-            ),
+              snackBarTheme: SnackBarThemeData(
+                backgroundColor: Colors.black,
+                actionTextColor: Colors.black,
+              ),
               accentColorBrightness: Brightness.light,
               primaryColor: Color(0xff00766c),
               primaryColorDark: Color(0xFF005b4f),
               cardColor: Color(0xFF64d8cb),
+              highlightColor: Colors.black,
               backgroundColor: Color(0xFF26a69a),
               accentColor: Color(0xFF14ffec),
               brightness: Brightness.light,
+              textSelectionTheme: TextSelectionThemeData(
+                  cursorColor: Colors.teal[200], selectionColor: Colors.teal[100], selectionHandleColor: Colors.teal[200]),
               splashColor: Colors.green[300],
               buttonColor: Color(0xFF64d8cb),
               hintColor: Colors.white,
@@ -54,45 +57,42 @@ class MyApp extends StatelessWidget {
               errorColor: Colors.red[300],
               dividerColor: Colors.black,
               textTheme: TextTheme(
-                  bodyText1: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                  ),
-                  headline2: TextStyle(color: Colors.black, fontSize: 35, fontWeight: FontWeight.bold),
-                  subtitle1: TextStyle(color: Colors.black, fontSize: 18),
-                  headline3: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),
-                  headline4: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
-                  bodyText2: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
+                  bodyText1: TextStyle(color: Colors.black, fontSize: 16, fontFamily: 'Sans'),
+                  headline3: TextStyle(color: Colors.black, fontSize: 20, fontFamily: 'FredokaOne'),
+                  headline2: TextStyle(color: Colors.black, fontSize: 35, fontFamily: 'FredokaOne'),
+                  subtitle1: TextStyle(color: Colors.black, fontSize: 18, fontFamily: 'Sans'),
+                  headline4: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold, fontFamily: 'Sans'),
+                  bodyText2: TextStyle(color: Colors.teal[100], fontSize: 14, fontWeight: FontWeight.bold),
                   headline1: TextStyle(color: Colors.black, fontSize: 60, fontWeight: FontWeight.bold))),
-         //
-         //
-         //DarkTheme
-         //
+          //
+          //
+          //DarkTheme
+          //
           darkTheme: ThemeData.dark().copyWith(
               snackBarTheme: SnackBarThemeData(
                 backgroundColor: Colors.grey[850],
                 actionTextColor: Colors.white,
               ),
               textTheme: TextTheme(
-                  bodyText1: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                  ),
-                  headline3: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),
-                  headline2: TextStyle(color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold),
-                  subtitle1: TextStyle(color: Colors.white, fontSize: 18),
-                  headline4: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                  bodyText1: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Sans'),
+                  headline3: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'FredokaOne'),
+                  headline2: TextStyle(color: Colors.white, fontSize: 35, fontFamily: 'FredokaOne'),
+                  subtitle1: TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Sans'),
+                  headline4: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold, fontFamily: 'Sans'),
                   bodyText2: TextStyle(color: Colors.teal[100], fontSize: 14, fontWeight: FontWeight.bold),
                   headline1: TextStyle(color: Colors.white, fontSize: 60, fontWeight: FontWeight.bold)),
               dividerColor: Colors.grey[400],
-              unselectedWidgetColor: Colors.grey[400],
+              unselectedWidgetColor: Colors.grey[600],
               errorColor: Colors.red[300],
               primaryColor: Colors.grey[850],
               hintColor: Colors.grey,
               primaryColorDark: Colors.black,
               cardColor: Colors.grey[850],
               backgroundColor: Colors.grey[900],
-              accentColor: Colors.teal[100],
+              highlightColor: Colors.black,
+              textSelectionTheme: TextSelectionThemeData(
+                  cursorColor: Colors.teal[200], selectionColor: Colors.teal[100], selectionHandleColor: Colors.teal[200]),
+              accentColor: Colors.teal[200],
               brightness: Brightness.dark,
               splashColor: Colors.greenAccent,
               buttonColor: Colors.grey[700],

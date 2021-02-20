@@ -40,3 +40,14 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  fonts:
+    - family: Lobster
+      fonts:
+        - asset: assets/font/LobsterTwo-Regular.ttf
+    - family: Sans
+      fonts:
+        - asset: assets/font/OpenSans-Light.ttf
+    - family: FredokaOne
+      fonts:
+        - asset: assets/font/FredokaOne-Regular.ttf

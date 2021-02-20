@@ -69,6 +69,15 @@ class Database_Services {
       return "Error";
     }
   }
+  Future<void> deleteDataFromFb(
+      DocumentSnapshot documentSnapshot,BuildContext context) async {
+    final User firebaseUser = _auth.currentUser;
 
+   await collectionReference1.doc(documentSnapshot.id).delete().then((value) {
+     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Data Deleted!',style: Theme.of(context).textTheme.headline4,)));
+   }).catchError((onError){
+     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error Deleting Data!',style: Theme.of(context).textTheme.headline4,)));
+   });
+  }
 
 }

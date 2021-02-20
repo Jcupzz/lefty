@@ -46,56 +46,57 @@ class _Select_LocationState extends State<Select_Location> {
   LatLng latLngs;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: currentPostion != null ? Stack(
-          children: [
+    return
+      Scaffold(
+        body: currentPostion != null ? SafeArea(
+          child: Stack(
+            children: [
 
-            GoogleMap(
-              mapToolbarEnabled: false,
-              buildingsEnabled: true,
-              mapType: MapType.hybrid,
-              tiltGesturesEnabled: true,
-              myLocationButtonEnabled: true,
-              myLocationEnabled: true,
-              onTap: _handleTap,
-              markers: Set.from(myMarker),
-              onMapCreated: _onMapCreated,
-              initialCameraPosition: CameraPosition(
-                target: currentPostion,
-                zoom: 10,
+              GoogleMap(
+                mapToolbarEnabled: false,
+                buildingsEnabled: true,
+                mapType: MapType.hybrid,
+                zoomControlsEnabled: false,
+                myLocationButtonEnabled: true,
+                myLocationEnabled: true,
+                onTap: _handleTap,
+                markers: Set.from(myMarker),
+                onMapCreated: _onMapCreated,
+                initialCameraPosition: CameraPosition(
+                  target: currentPostion,
+                  zoom: 10,
+                ),
               ),
-            ),
-            Positioned(
-              bottom: 10,
-                child:
-                Container(
-                  
-                  height: 60,
-                  width: MediaQuery.of(context).size.width,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20,0,20,0),
-                    child: ElevatedButton(
-                      onPressed: () async{
-                        if(latLngs!=null)
-                          {
-                            Navigator.pop(context,latLngs);
+              Positioned(
+                bottom: 10,
+                  child:
+                  Container(
+                    
+                    height: 60,
+                    width: MediaQuery.of(context).size.width,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20,0,20,0),
+                      child: ElevatedButton(
+                        onPressed: () async{
+                          if(latLngs!=null)
+                            {
+                              Navigator.pop(context,latLngs);
+                            }
+                          else{
+                            BotToast.showText(text: "Tap on screen to select institute location");
                           }
-                        else{
-                          BotToast.showText(text: "Tap on screen to select institute location");
-                        }
-                      },
-                      child: Text("Done",style: TextStyle(color: Colors.white),),
-                      style: ElevatedButton.styleFrom(primary: Colors.blue,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+                        },
+                        child: Text("Done",style: TextStyle(color: Colors.white),),
+                        style: ElevatedButton.styleFrom(primary: Colors.blue,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+                      ),
                     ),
-                  ),
-                )
-            )
+                  )
+              )
 
-          ],
+            ],
+          ),
         ):Circular_Loading(),
-      ),
-    );
+     );
   }
 
   //functions

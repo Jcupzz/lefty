@@ -2,6 +2,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lefty/Authentication/Authentication_Services.dart';
+import 'package:lefty/Theme/ThemeController.dart';
 import 'package:lefty/main.dart';
 import 'package:lefty/static/Loading.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,7 @@ class _LoginState extends State<Login> {
     return loading
         ? Loading()
         : Scaffold(
-            backgroundColor: Colors.purple[900],
+            backgroundColor: Theme.of(context).backgroundColor,
             body: Center(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
@@ -38,9 +39,9 @@ class _LoginState extends State<Login> {
                             child: Text(
                               "Hi there",
                               style: TextStyle(
-                                  color: Colors.deepOrange[200],
-                                  fontSize: 74,
-                                  fontStyle: FontStyle.normal,
+                                  color: ThemeController.to.themeMode == ThemeMode.light ? Colors.black : Colors.teal[50],
+                                  fontSize: 65,
+                                  fontFamily: 'Lobster',
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -49,14 +50,15 @@ class _LoginState extends State<Login> {
                             child: Text(
                               "Welcome back",
                               style: TextStyle(
-                                  color: Colors.deepOrange[300],
-                                  fontSize: 40,
+                                  color: ThemeController.to.themeMode == ThemeMode.light ? Colors.black : Colors.teal[100],
+                                  fontSize: 35,
+                                  fontFamily: 'Lobster',
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
                           SizedBox(
-                            height: 50,
+                            height: 65,
                           ),
 
                           //Email Field
@@ -66,21 +68,18 @@ class _LoginState extends State<Login> {
                             onChanged: (value) {
                               setState(() => email = value);
                             },
-                            style: TextStyle(color: Colors.purple[200]),
-                            cursorColor: Colors.deepOrange,
+                            style: Theme.of(context).textTheme.headline4,
                             decoration: InputDecoration(
-                              labelStyle: TextStyle(
-                                color: Colors.deepOrange[200],
-                              ),
+                              labelStyle: Theme.of(context).textTheme.headline4,
                               labelText: "Email",
                               fillColor: Colors.white,
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(width: 1, color: Colors.purple[200]),
+                                borderSide: BorderSide(width: 1, color: Colors.teal[200]),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(width: 1, color: Colors.deepOrange[200]),
+                                borderSide: BorderSide(width: 1, color: Theme.of(context).unselectedWidgetColor),
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -103,19 +102,16 @@ class _LoginState extends State<Login> {
                             },
                             obscureText: true,
                             style: TextStyle(color: Colors.purple[200]),
-                            cursorColor: Colors.deepOrange,
                             decoration: InputDecoration(
-                              labelStyle: TextStyle(
-                                color: Colors.deepOrange[200],
-                              ),
+                              labelStyle: Theme.of(context).textTheme.headline4,
                               labelText: "Password",
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(width: 1, color: Colors.purple[200]),
+                                borderSide: BorderSide(width: 1, color: Colors.teal[200]),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(width: 1, color: Colors.deepOrange[200]),
+                                borderSide: BorderSide(width: 1, color: Theme.of(context).unselectedWidgetColor),
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -130,12 +126,15 @@ class _LoginState extends State<Login> {
                             width: double.infinity,
                             child: PhysicalModel(
                               color: Colors.transparent,
-                              shadowColor: Colors.deepPurple[900],
-                              elevation: 10,
+                              shadowColor: Colors.black,
                               shape: BoxShape.rectangle,
                               borderRadius: BorderRadius.circular(20),
-                              child: FlatButton(
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Theme.of(context).buttonColor,
+                                  elevation: 20,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                ),
                                 onPressed: () async {
                                   print("Button presed");
                                   //
@@ -153,13 +152,13 @@ class _LoginState extends State<Login> {
                                       Navigator.pushReplacementNamed(context, '/Home');
                                       BotToast.showSimpleNotification(
                                         title: "Welcome back!",
-                                        backgroundColor: Colors.orangeAccent,
+                                        backgroundColor: Colors.teal[100],
                                       );
                                     } else {
                                       Navigator.pushReplacementNamed(context, '/Register');
                                       BotToast.showSimpleNotification(
                                         title: "Failed to sign in. Please check internet connection and try again!",
-                                        backgroundColor: Colors.red,
+                                        backgroundColor: Colors.red[300],
                                       );
                                     }
                                   }
@@ -180,10 +179,12 @@ class _LoginState extends State<Login> {
                                   //   }
                                   // }
                                 },
-                                color: Colors.deepOrange[400],
                                 child: Padding(
                                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                                  child: Text("Sign in"),
+                                  child: Text(
+                                    "Sign in",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
                               ),
                             ),

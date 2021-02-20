@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lefty/Authentication/Authentication_Services.dart';
+import 'package:lefty/Theme/ThemeController.dart';
 import 'package:lefty/main.dart';
 import 'package:lefty/static/Loading.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +24,7 @@ class _RegisterState extends State<Register> {
     return loading
         ? Loading()
         : Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).backgroundColor,
             body: Center(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
@@ -36,10 +38,10 @@ class _RegisterState extends State<Register> {
                             child: Text(
                               "Welcome to",
                               style: TextStyle(
-                                  color: Colors.blueGrey[700],
-                                  fontSize: 35,
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.bold),
+                                color: ThemeController.to.themeMode == ThemeMode.light ? Colors.black : Colors.teal[50],
+                                fontSize: 45,
+                                fontFamily: 'Lobster'
+                              ),
                             ),
                           ),
                           Align(
@@ -47,43 +49,35 @@ class _RegisterState extends State<Register> {
                             child: Text(
                               "Lefty.",
                               style: TextStyle(
-                                  color: Colors.blueGrey[900],
-                                  fontSize: 80,
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.bold),
+                                  color: ThemeController.to.themeMode == ThemeMode.light ? Colors.black : Colors.teal[100],
+                                  fontSize: 100,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Lobster'),
                             ),
                           ),
                           SizedBox(
-                            height: 50,
+                            height: 60,
                           ),
 
                           //Email Field
 
                           TextFormField(
-                            validator: (val) =>
-                                val.isEmpty || !(val.contains('@'))
-                                    ? 'Enter a valid email address'
-                                    : null,
+                            validator: (val) => val.isEmpty || !(val.contains('@')) ? 'Enter a valid email address' : null,
+                            style: Theme.of(context).textTheme.headline4,
                             onChanged: (value) {
                               setState(() => email = value);
                             },
-                            style: TextStyle(color: Colors.blueGrey[900]),
-                            cursorColor: Colors.blueGrey[900],
                             decoration: InputDecoration(
-                              labelStyle: TextStyle(
-                                color: Colors.blueGrey[900],
-                              ),
+                              labelStyle: Theme.of(context).textTheme.headline4,
                               labelText: "Email",
                               fillColor: Colors.white,
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
-                                    width: 1, color: Colors.blueGrey[500]),
+                                borderSide: BorderSide(width: 1, color: Theme.of(context).unselectedWidgetColor),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
-                                    width: 1, color: Colors.blueGrey[900]),
+                                borderSide: BorderSide(width: 1, color: Theme.of(context).unselectedWidgetColor),
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -99,29 +93,23 @@ class _RegisterState extends State<Register> {
                           //Password Field
 
                           TextFormField(
-                            validator: (val) => val.isEmpty || val.length < 6
-                                ? 'Enter a password greater than 6 characters'
-                                : null,
+                            validator: (val) =>
+                                val.isEmpty || val.length < 6 ? 'Enter a password greater than 6 characters' : null,
                             onChanged: (value) {
                               setState(() => password = value);
                             },
                             obscureText: true,
-                            style: TextStyle(color: Colors.blueGrey[900]),
-                            cursorColor: Colors.blueGrey[900],
+                            style: Theme.of(context).textTheme.headline4,
                             decoration: InputDecoration(
-                              labelStyle: TextStyle(
-                                color: Colors.blueGrey[500],
-                              ),
+                              labelStyle: Theme.of(context).textTheme.headline4,
                               labelText: "Password",
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
-                                    width: 1, color: Colors.blueGrey[500]),
+                                borderSide: BorderSide(width: 1, color: Theme.of(context).unselectedWidgetColor),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
-                                    width: 1, color: Colors.blueGrey[900]),
+                                borderSide: BorderSide(width: 1, color: Theme.of(context).unselectedWidgetColor),
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -136,39 +124,37 @@ class _RegisterState extends State<Register> {
                             width: double.infinity,
                             child: PhysicalModel(
                               color: Colors.transparent,
-                              shadowColor: Colors.blueGrey[500],
-                              elevation: 10,
+                              shadowColor: Colors.black,
                               shape: BoxShape.rectangle,
                               borderRadius: BorderRadius.circular(20),
-                              child: FlatButton(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shadowColor: Colors.black,
+                                  elevation: 20,
+                                  primary: Theme.of(context).buttonColor,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                ),
                                 onPressed: () async {
                                   if (_formkey.currentState.validate()) {
                                     setState(() {
                                       loading = true;
                                     });
-                                    dynamic isSuccess = await context
-                                        .read<AuthenticationService>()
-                                        .signUp(
-                                            email: email, password: password);
+                                    dynamic isSuccess =
+                                        await context.read<AuthenticationService>().signUp(email: email, password: password);
                                     if (isSuccess.toString() == "Signed up") {
                                       setState(() {
                                         isVerified = true;
                                       });
-                                      Navigator.pushReplacementNamed(
-                                          context, '/Home');
+                                      Navigator.pushReplacementNamed(context, '/Home');
                                       BotToast.showSimpleNotification(
                                         title: " Welcome! ",
-                                        backgroundColor: Colors.blueGrey[900],
+                                        backgroundColor: Colors.teal[200],
                                       );
                                     } else {
-                                      Navigator.pushReplacementNamed(
-                                          context, '/Register');
+                                      Navigator.pushReplacementNamed(context, '/Register');
                                       BotToast.showSimpleNotification(
-                                        title:
-                                            "Failed to register. Please check internet connection and try again!",
-                                        backgroundColor: Colors.red,
+                                        title: "Failed to register. Please check internet connection and try again!",
+                                        backgroundColor: Colors.red[300],
                                       );
                                     }
                                   }
@@ -191,26 +177,24 @@ class _RegisterState extends State<Register> {
                                   //  }
                                   // }
                                 },
-                                color: Colors.blueGrey[900],
                                 child: Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                                   child: Text(
                                     "Sign up",
-                                    style: TextStyle(color: Colors.white),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                          FlatButton(
-                              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          TextButton(
                               onPressed: () {
                                 Navigator.pushNamed(context, '/Login');
                               },
                               child: Text(
                                 "Already registered ? Login Here",
-                                style: TextStyle(color: Colors.blueGrey[900]),
+                                style: Theme.of(context).textTheme.headline4.apply(
+                                      fontFamily: '',
+                                    ),
                               )),
                         ],
                       ),

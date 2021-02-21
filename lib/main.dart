@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'Theme/ThemeController.dart';
 
 bool isVerified = false;
+bool showSplashScreen = true;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
               cardColor: Colors.teal[50],
               highlightColor: Colors.black,
               backgroundColor: Colors.teal[100],
-              accentColor: Color(0xFF14ffec),
+              accentColor: Colors.tealAccent,
               brightness: Brightness.light,
               textSelectionTheme: TextSelectionThemeData(
                   cursorColor: Colors.teal[900], selectionColor: Colors.white70, selectionHandleColor: Colors.teal[500]),
@@ -119,12 +120,13 @@ class AuthenticationWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
     print("Printing fbuser: " + firebaseUser.toString());
+
     if (firebaseUser == null) {
       isVerified = false;
-      return MyBottomNavigationBar();
+      return SplashScreen();
     } else {
       isVerified = true;
-      return MyBottomNavigationBar();
+      return SplashScreen();
     }
   }
 }

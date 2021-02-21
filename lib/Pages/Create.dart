@@ -257,7 +257,7 @@ class _CreateState extends State<Create> {
                               ),
                             ):Expanded(
                               child: Container(
-                                margin: EdgeInsets.fromLTRB(5, 10, 5, 10),
+                                margin: EdgeInsets.fromLTRB(5, 10, 5, 5),
                                 width: MediaQuery.of(context).size.width,
                                 height: MediaQuery.of(context).size.width * 0.5,
                                 child: Card(

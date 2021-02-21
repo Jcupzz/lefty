@@ -1,3 +1,4 @@
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -72,15 +73,7 @@ class _HomeState extends State<Home> {
                 changeThemeShowDialog(context);
                 break;
               case 2:
-                dynamic isLoggedOut =
-                await context.read<AuthenticationService>().signOut();
-                if (isLoggedOut.toString() == "Signed out") {
-                  setState(() {
-                    isVerified = false;
-                  });
-                  print("Signed Outt");
-                  SystemNavigator.pop();
-                }
+                showSignOutDialog(context);
                 break;
               case 3:
                 Navigator.push(context, MaterialPageRoute(builder: (_)=>About()));
@@ -214,12 +207,55 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+  showSignOutDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            elevation: 24,
+            backgroundColor: Theme.of(context).cardColor,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+            title: Text("SignOut", style: Theme.of(context).textTheme.headline3),
+            content: Text("Are you sure?", style: Theme.of(context).textTheme.subtitle1),
+            actions: <Widget>[
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(primary: Theme.of(context).cardColor, elevation: 0),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  "No",
+                  style: TextStyle(color: Colors.greenAccent, fontSize: 18),
+                ),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(primary: Theme.of(context).cardColor, elevation: 0),
+                onPressed: () async{
+                  dynamic isLoggedOut = await context.read<AuthenticationService>().signOut();
+                  if (isLoggedOut.toString() == "Signed out") {
+                    setState(() {
+                      isVerified = false;
+                    });
+                    print("Signed Outt");
+                    SystemNavigator.pop();
+                  }
+                },
+                child: Text(
+                  "Yes",
+                  style: TextStyle(fontSize: 18, color: Colors.redAccent),
+                ),
+              ),
+            ],
+          );
+        });
+  }
+
   changeThemeShowDialog(BuildContext context) {
     showDialog(
         context: context,
         builder: (_) {
           return AlertDialog(
-            title: Text("Theme"),
+            title: Text("Theme",style: Theme.of(context).textTheme.headline3,),
             content: themeDialog(),
           );
         });

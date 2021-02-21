@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lefty/Authentication/Register.dart';
 import 'package:lefty/Database_Services/Database_Services.dart';
-import 'package:lefty/Pages/Request.dart';
 import 'package:lefty/main.dart';
 import 'package:lefty/static/Circular_Loading.dart';
 import 'package:lefty/static/Horizontal_Loading.dart';
@@ -26,8 +25,19 @@ class Create extends StatefulWidget {
 class _CreateState extends State<Create> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   String timer;
+  FirebaseAuth _auth = FirebaseAuth.instance;
   Database_Services database_services = new Database_Services();
-
+  Stream stream;
+@override
+  void initState() {
+    super.initState();
+    if(isVerified){
+      final User firebaseUser = _auth.currentUser;
+      stream = firestore.collection("iDetails").where('uid', isEqualTo: firebaseUser.uid).snapshots();
+    }else{
+      //do nothing
+    }
+}
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
@@ -107,12 +117,12 @@ class _CreateState extends State<Create> {
                       ),
                     ),
                     StreamBuilder<QuerySnapshot>(
-                        stream: firestore.collection("iDetails").where('uid', isEqualTo: firebaseUser.uid).snapshots(),
+                        stream: stream,
                         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                           if (!snapshot.hasData) {
                             return Horizontal_Loading();
                           } else {
-                            return Expanded(
+                            return (!(snapshot.data.docs.length == 0 || snapshot.data == null))?Expanded(
                               child: ListView(
                                 shrinkWrap: true,
                                 children: snapshot.data.docs.map((DocumentSnapshot document) {
@@ -241,6 +251,24 @@ class _CreateState extends State<Create> {
                                         ),
                                       ));
                                 }).toList(),
+                              ),
+                            ):Expanded(
+                              child: Container(
+                                margin: EdgeInsets.fromLTRB(5, 10, 5, 10),
+                                width: MediaQuery.of(context).size.width,
+                                height: MediaQuery.of(context).size.width * 0.5,
+                                child: Card(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                                  elevation: 0,
+                                  color: Theme.of(context).cardColor,
+                                  child: Center(
+                                    child: Text(
+                                      'You have 0 institute\nCreate an Institute \nby clicking Register Institute',
+                                      textAlign: TextAlign.center,
+                                      style: Theme.of(context).textTheme.bodyText1,
+                                    ),
+                                  ),
+                                ),
                               ),
                             );
                           }

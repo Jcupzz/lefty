@@ -68,6 +68,7 @@ class MyApp extends StatelessWidget {
           //
           //
           //DarkTheme
+
           //
           darkTheme: ThemeData.dark().copyWith(
               snackBarTheme: SnackBarThemeData(
@@ -106,7 +107,7 @@ class MyApp extends StatelessWidget {
             '/SplashScreen': (context) => SplashScreen(),
             '/Login': (context) => Login(),
             '/Register': (context) => Register(),
-            '/Home': (context) => MyBottomNavigationBar(),
+            '/Home': (context) => MyBottomNavigationBar()
           }),
     );
   }

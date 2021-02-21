@@ -22,6 +22,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    var brightness = Theme.of(context).brightness;
     return loading
         ? Loading()
         : Scaffold(
@@ -39,7 +40,7 @@ class _LoginState extends State<Login> {
                             child: Text(
                               "Hi there",
                               style: TextStyle(
-                                  color: ThemeController.to.themeMode == ThemeMode.light ? Colors.teal[600] : Colors.teal[50],
+                                  color: brightness == Brightness.light ? Colors.teal[600] : Colors.teal[50],
                                   fontSize: 65,
                                   fontFamily: 'Lobster',
                                   fontWeight: FontWeight.bold),
@@ -50,7 +51,7 @@ class _LoginState extends State<Login> {
                             child: Text(
                               "Welcome back",
                               style: TextStyle(
-                                  color: ThemeController.to.themeMode == ThemeMode.light ? Colors.teal[700] : Colors.teal[100],
+                                  color:brightness == Brightness.light? Colors.teal[700] : Colors.teal[100],
                                   fontSize: 35,
                                   fontFamily: 'Lobster',
                                   fontStyle: FontStyle.normal,
@@ -128,7 +129,7 @@ class _LoginState extends State<Login> {
                               style: ElevatedButton.styleFrom(
                                 primary: Theme.of(context).buttonColor,
                                 elevation: 10,
-                                shadowColor: ThemeController.to.themeMode == ThemeMode.light?Colors.teal[500]:Colors.black,
+                                shadowColor: brightness == Brightness.light?Colors.teal[500]:Colors.black,
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                               ),
                               onPressed: () async {

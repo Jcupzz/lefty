@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:lefty/Authentication/Login.dart';
 import 'package:lefty/Authentication/Register.dart';
 import 'package:lefty/Home.dart';
+import 'package:lefty/Pages/Account.dart';
 import 'package:lefty/Pages/Create.dart';
 import 'package:lefty/Pages/Location.dart';
 
@@ -18,7 +19,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     Home(),
     Create(),
     Location(),
-    Register(),
+    Account(),
   ];
 
   @override

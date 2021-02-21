@@ -45,7 +45,7 @@ class _LocationState extends State<Location> {
   }
 
   void _getAllLatLongFromFb() async {
-    CollectionReference collectionReference1 = FirebaseFirestore.instance.collection("iDetails");
+    CollectionReference collectionReference1 = FirebaseFirestore.instance.collection("iDetails").where('isRequested',isEqualTo: true);
     await collectionReference1.get().then((QuerySnapshot querySnapshot) => querySnapshot.docs.forEach((doc) {
           myMarker.add(Marker(
               markerId: MarkerId(LatLng(doc['lat'], doc['long']).toString()),

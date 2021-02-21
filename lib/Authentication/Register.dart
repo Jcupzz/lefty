@@ -21,6 +21,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    var brightness = Theme.of(context).brightness;
     return loading
         ? Loading()
         : Scaffold(
@@ -38,7 +39,7 @@ class _RegisterState extends State<Register> {
                             child: Text(
                               "Welcome to",
                               style: TextStyle(
-                                color: ThemeController.to.themeMode == ThemeMode.light ? Colors.teal[600] : Colors.teal[50],
+                                color: brightness == Brightness.light ? Colors.teal[600] : Colors.teal[50],
                                 fontSize: 45,
                                 fontFamily: 'Lobster'
                               ),
@@ -49,7 +50,7 @@ class _RegisterState extends State<Register> {
                             child: Text(
                               "Lefty.",
                               style: TextStyle(
-                                  color: ThemeController.to.themeMode == ThemeMode.light ? Colors.teal[700] : Colors.teal[100],
+                                  color: brightness == Brightness.light ? Colors.teal[700] : Colors.teal[100],
                                   fontSize: 100,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Lobster'),
@@ -124,7 +125,7 @@ class _RegisterState extends State<Register> {
                             width: double.infinity,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                shadowColor: ThemeController.to.themeMode == ThemeMode.light?Colors.teal[500]:Colors.black,
+                                shadowColor: brightness == Brightness.light?Colors.teal[500]:Colors.black,
                                 elevation: 10,
                                 primary: Theme.of(context).buttonColor,
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -187,7 +188,7 @@ class _RegisterState extends State<Register> {
                               child: Text(
                                 "Already registered ? Login Here",
                                 style: Theme.of(context).textTheme.headline5.apply(
-                                      fontFamily: '',color: ThemeController.to.themeMode == ThemeMode.light?Colors.teal[700]:Colors.grey
+                                      fontFamily: '',color: brightness == Brightness.light?Colors.teal[700]:Colors.grey
                                     ),
                               )),
                         ],

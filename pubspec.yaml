@@ -51,3 +51,13 @@ flutter:
     - family: FredokaOne
       fonts:
         - asset: assets/font/FredokaOne-Regular.ttf
+
+flutter_icons:
+  image_path_android: "assets/icon/android-fg.png"
+  image_path_ios: "assets/icon/ios.png"
+  android: true # can specify file name here e.g. "ic_launcher"
+  ios: true # can specify file name here e.g. "My-Launcher-Icon"
+  adaptive_icon_background: "assets/icon/android-bg.png" # only available for Android 8.0 devices and above
+  adaptive_icon_foreground: "assets/icon/android-fg.png"
+
+  # flutter packages pub run flutter_launcher_icons:main

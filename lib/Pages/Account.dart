@@ -29,10 +29,10 @@ class _AccountState extends State<Account> {
   @override
   void initState() {
     super.initState();
-    if(isVerified){
+    if (isVerified) {
       final User firebaseUser = _auth.currentUser;
       stream = firestore.collection("iDetails").where('uid', isEqualTo: firebaseUser.uid).snapshots();
-    }else{
+    } else {
       //do nothing
     }
   }
@@ -74,7 +74,9 @@ class _AccountState extends State<Account> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(14),
                             ),
-                            child: Center(child: Text("${firebaseUser.email}"??'Anonymous', style: Theme.of(context).textTheme.subtitle1))),
+                            child: Center(
+                                child:
+                                    Text("${firebaseUser.email}" ?? 'Anonymous', style: Theme.of(context).textTheme.subtitle1))),
                       ),
                       Container(
                           width: MediaQuery.of(context).size.width,
@@ -96,7 +98,12 @@ class _AccountState extends State<Account> {
                                 return Horizontal_Loading();
                               } else {
                                 return (!(snapshot.data.docs.length == 0 || snapshot.data == null))
-                                    ? Expanded(
+                                    ? ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                            maxHeight: double.infinity,
+                                            minHeight: MediaQuery.of(context).size.width * 0.5,
+                                            minWidth: MediaQuery.of(context).size.width,
+                                            maxWidth: MediaQuery.of(context).size.width),
                                         child: ListView(
                                           shrinkWrap: true,
                                           children: snapshot.data.docs.map((DocumentSnapshot document) {
@@ -113,8 +120,9 @@ class _AccountState extends State<Account> {
                                                         text: 'Please goto Create menu and long press to delete institute');
                                                   },
                                                   title: Padding(
-                                                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                                                     child: Column(
+                                                      mainAxisSize: MainAxisSize.min,
                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: [
                                                         Text(document.data()['iName'],
@@ -279,7 +287,7 @@ class _AccountState extends State<Account> {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Theme.of(context).cardColor, elevation: 0),
-                onPressed: () async{
+                onPressed: () async {
                   dynamic isLoggedOut = await context.read<AuthenticationService>().signOut();
                   if (isLoggedOut.toString() == "Signed out") {
                     setState(() {

@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
                   subtitle1: TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Sans'),
                   headline4: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold, fontFamily: 'Sans'),
                   bodyText2: TextStyle(color: Colors.teal[100], fontSize: 14, fontWeight: FontWeight.bold),
-                  headline1: TextStyle(color: Colors.white, fontSize: 60, fontWeight: FontWeight.bold)),
+                  headline1: TextStyle(color: Colors.white, fontSize: 60, fontWeight: FontWeight.normal,fontFamily: 'FredokaOne')),
               dividerColor: Colors.grey[400],
               unselectedWidgetColor: Colors.grey[600],
               errorColor: Colors.red[300],

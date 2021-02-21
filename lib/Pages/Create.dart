@@ -80,12 +80,15 @@ class _CreateState extends State<Create> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Text(
-                      "Create",
-                      style: Theme.of(context).textTheme.headline1,
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(7,0,0,0),
+                      child: Text(
+                        "Create",
+                        style: Theme.of(context).textTheme.headline1,
+                      ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(11, 0, 0, 0),
                       child: Text(
                         'Register an institute',
                         style: Theme.of(context).textTheme.bodyText2,

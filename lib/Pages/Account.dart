@@ -74,7 +74,7 @@ class _AccountState extends State<Account> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(14),
                             ),
-                            child: Center(child: Text("${firebaseUser.email}", style: Theme.of(context).textTheme.subtitle1))),
+                            child: Center(child: Text("${firebaseUser.email}"??'Anonymous', style: Theme.of(context).textTheme.subtitle1))),
                       ),
                       Container(
                           width: MediaQuery.of(context).size.width,
@@ -199,7 +199,7 @@ class _AccountState extends State<Account> {
                                             child: Text(
                                               'You have 0 institute\nCreate an Institute \nby clicking Register \nInstitute in Create menu',
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context).textTheme.subtitle1,
+                                              style: Theme.of(context).textTheme.bodyText1,
                                             ),
                                           ),
                                         ),

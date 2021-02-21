@@ -45,19 +45,22 @@ class _LocationState extends State<Location> {
   }
 
   void _getAllLatLongFromFb() async {
-    CollectionReference collectionReference1 = FirebaseFirestore.instance.collection("iDetails").where('isRequested',isEqualTo: true);
-    await collectionReference1.get().then((QuerySnapshot querySnapshot) => querySnapshot.docs.forEach((doc) {
-          myMarker.add(Marker(
-              markerId: MarkerId(LatLng(doc['lat'], doc['long']).toString()),
-              onTap: () {
-                setState(() {
-                  showDetailsButton = true;
-                  documentSnapshot = doc;
-                });
-              },
-              position: LatLng(doc['lat'], doc['long']),
-              infoWindow: InfoWindow(title: doc['iName'],snippet: doc['iAddress'])));
-        }));
+    await FirebaseFirestore.instance
+        .collection("iDetails")
+        .where('isRequested', isEqualTo: true)
+        .get()
+        .then((QuerySnapshot querySnapshot) => querySnapshot.docs.forEach((doc) {
+              myMarker.add(Marker(
+                  markerId: MarkerId(LatLng(doc['lat'], doc['long']).toString()),
+                  onTap: () {
+                    setState(() {
+                      showDetailsButton = true;
+                      documentSnapshot = doc;
+                    });
+                  },
+                  position: LatLng(doc['lat'], doc['long']),
+                  infoWindow: InfoWindow(title: doc['iName'], snippet: doc['iAddress'])));
+            }));
   }
 
   @override
@@ -78,7 +81,7 @@ class _LocationState extends State<Location> {
       backgroundColor: Theme.of(context).backgroundColor,
       body: currentPostion != null
           ? SafeArea(
-            child: Stack(
+              child: Stack(
                 children: [
                   GoogleMap(
                     mapToolbarEnabled: true,
@@ -93,32 +96,35 @@ class _LocationState extends State<Location> {
                       zoom: 10,
                     ),
                   ),
-                  (showDetailsButton)?Positioned(
-                      bottom: 18,
-                      left: 0,
-                      child:
-                      Container(
-
-                        height: 38,
-                        width: MediaQuery.of(context).size.width * 0.6,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(20,0,20,0),
-                          child: ElevatedButton(
-                            onPressed: () async{
-                              //TODO:
-                              if(documentSnapshot!=null){
-                                Navigator.push(context, MaterialPageRoute(builder: (_)=>Details(documentSnapshot)));
-                              }
-                            },
-                            child: Text("Show Details",style: TextStyle(color: Colors.black),),
-                            style: ElevatedButton.styleFrom(primary: Colors.white70,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-                          ),
-                        ),
-                      )
-                  ):Container(),
+                  (showDetailsButton)
+                      ? Positioned(
+                          bottom: 18,
+                          left: 0,
+                          child: Container(
+                            height: 38,
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  if (documentSnapshot != null) {
+                                    Navigator.push(context, MaterialPageRoute(builder: (_) => Details(documentSnapshot)));
+                                  }
+                                },
+                                child: Text(
+                                  "Show Details",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.white70,
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+                              ),
+                            ),
+                          ))
+                      : Container(),
                 ],
               ),
-          )
+            )
           : Circular_Loading(),
     );
   }
@@ -152,5 +158,3 @@ class _LocationState extends State<Location> {
     }
   }
 }
-
-

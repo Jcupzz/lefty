@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:lefty/Theme/ThemeController.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Details extends StatefulWidget {

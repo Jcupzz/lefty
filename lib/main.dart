@@ -14,7 +14,6 @@ import 'package:provider/provider.dart';
 import 'Theme/ThemeController.dart';
 
 bool isVerified = false;
-bool showSplashScreen = true;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

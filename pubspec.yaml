@@ -31,6 +31,7 @@ dependencies:
   shared_preferences: ^0.5.12+4
   webview_flutter: ^1.0.7
   url_launcher: ^5.7.10
+  google_maps_flutter_web: ^0.1.0
 
 dev_dependencies:
   flutter_test:

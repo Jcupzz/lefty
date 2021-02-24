@@ -25,6 +25,7 @@ etc.. can register an institute in lefty and lefty connects them to people who c
   <img src="assets/Screenshots/11.jpg" width="200" />
   <img src="assets/Screenshots/12.jpg" width="200" />
 </p>
+
 ## LightMode
 <p float="left">
   <img src="assets/Screenshots/13.jpg" width="200" />
@@ -40,4 +41,5 @@ etc.. can register an institute in lefty and lefty connects them to people who c
   <img src="assets/Screenshots/23.jpg" width="200" />
   <img src="assets/Screenshots/24.jpg" width="200" />
 </p>
+
 

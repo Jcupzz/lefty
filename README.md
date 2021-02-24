@@ -11,6 +11,7 @@ etc.. can register an institute in lefty and lefty connects them to people who c
 ## Screenshots
 
 ## DarkMode
+
 <p float="left">
   <img src="assets/Screenshots/1.jpg" width="200" />
   <img src="assets/Screenshots/2.jpg" width="200" />
@@ -27,6 +28,7 @@ etc.. can register an institute in lefty and lefty connects them to people who c
 </p>
 
 ## LightMode
+
 <p float="left">
   <img src="assets/Screenshots/13.jpg" width="200" />
   <img src="assets/Screenshots/14.jpg" width="200" />
@@ -42,4 +44,6 @@ etc.. can register an institute in lefty and lefty connects them to people who c
   <img src="assets/Screenshots/24.jpg" width="200" />
 </p>
 
-
+Apk is available in assets folder.
+Also available as web app(Not fully functional.Preferred installing apk)
+Web app link: https://lefty-3ea7c.firebaseapp.com/

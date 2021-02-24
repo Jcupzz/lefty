@@ -1,16 +1,43 @@
-# lefty
+# Lefty
 
-A new Flutter application.
+A Food leftover donating app
 
-## Getting Started
+## About
 
-This project is a starting point for a Flutter application.
+Most of the people who has excess food leftovers from functions like marriages,party,etc..just dump food or waste them, because they don't know what to do with it. Through lefty people can donate
+excess food leftover to the needy ones.Lefty has a maps enabled location based feature that helps people to find the needy ones easily.Residential Institutions like orphanages,old age homes,
+etc.. can register an institute in lefty and lefty connects them to people who can help them.
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## DarkMode
+<p float="left">
+  <img src="assets/Screenshots/1.jpg" width="200" />
+  <img src="assets/Screenshots/2.jpg" width="200" />
+  <img src="assets/Screenshots/3.jpg" width="200" />
+  <img src="assets/Screenshots/4.jpg" width="200" />
+  <img src="assets/Screenshots/5.jpg" width="200" />
+  <img src="assets/Screenshots/6.jpg" width="200" />
+  <img src="assets/Screenshots/7.jpg" width="200" />
+  <img src="assets/Screenshots/8.jpg" width="200" />
+  <img src="assets/Screenshots/9.jpg" width="200" />
+  <img src="assets/Screenshots/10.jpg" width="200" />
+  <img src="assets/Screenshots/11.jpg" width="200" />
+  <img src="assets/Screenshots/12.jpg" width="200" />
+</p>
+## LightMode
+<p float="left">
+  <img src="assets/Screenshots/13.jpg" width="200" />
+  <img src="assets/Screenshots/14.jpg" width="200" />
+  <img src="assets/Screenshots/15.jpg" width="200" />
+  <img src="assets/Screenshots/16.jpg" width="200" />
+  <img src="assets/Screenshots/17.jpg" width="200" />
+  <img src="assets/Screenshots/18.jpg" width="200" />
+  <img src="assets/Screenshots/19.jpg" width="200" />
+  <img src="assets/Screenshots/20.jpg" width="200" />
+  <img src="assets/Screenshots/21.jpg" width="200" />
+  <img src="assets/Screenshots/22.jpg" width="200" />
+  <img src="assets/Screenshots/23.jpg" width="200" />
+  <img src="assets/Screenshots/24.jpg" width="200" />
+</p>
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
